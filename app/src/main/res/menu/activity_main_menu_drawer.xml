@@ -5,20 +5,20 @@
 
     <item
         android:id="@+id/activity_main_drawer_top_stories"
-        android:title="Top Stories" />
+        android:title="@string/drawer_top_stories" />
     <item
         android:id="@+id/activity_main_drawer_most_popular"
-        android:title="Most Popular" />
+        android:title="@string/drawer_most_popular" />
     <item
         android:id="@+id/activity_main_drawer_arts"
-        android:title="Arts" />
+        android:title="@string/drawer_arts" />
     <item
         android:id="@+id/activity_main_drawer_business"
-        android:title="Business" />
+        android:title="@string/drawer_business" />
     <item
         android:id="@+id/activity_main_drawer_politics"
-        android:title="Politics" />
+        android:title="@string/drawer_politics"/>
     <item
         android:id="@+id/activity_main_drawer_travel"
-        android:title="Travel" />
+        android:title="@string/drawer_travel" />
 </menu>
