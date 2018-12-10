@@ -2,13 +2,12 @@ package com.albanfontaine.mynews.Controllers;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 
 import com.albanfontaine.mynews.R;
 
@@ -20,7 +19,7 @@ import butterknife.ButterKnife;
  */
 public class MainFragment extends Fragment {
 
-    @BindView(R.id.fragment_main_rootview) RelativeLayout mRootView;
+    @BindView(R.id.fragment_main_rootview) LinearLayout mRootView;
     @BindView(R.id.fragment_main_recycler_view) RecyclerView mRecyclerView;
 
     // Create keys for our Bundle
