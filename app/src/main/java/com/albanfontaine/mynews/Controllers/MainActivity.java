@@ -3,6 +3,7 @@ package com.albanfontaine.mynews.Controllers;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,11 +14,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.albanfontaine.mynews.R;
+import com.albanfontaine.mynews.Views.PageAdapter;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private Toolbar mToolbar;
-    private DrawerLayout mDrawerLayout;
-    private NavigationView mNavigationView;
+
+    @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.activity_main_drawer_layout) DrawerLayout mDrawerLayout;
+    @BindView(R.id.activity_main_nav_view) NavigationView mNavigationView;
+    @BindView(R.id.activity_main_viewpager) ViewPager mPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.configureToolbar();
         this.configureDrawerLayout();
         this.configureNavigationView();
+        this.configureViewPager();
     }
 
     @Override
@@ -45,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     // Setup
     private void configureToolbar(){
-        mToolbar = findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
@@ -53,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void configureDrawerLayout(){
-        this.mDrawerLayout = findViewById(R.id.activity_main_drawer_layout);
+        ButterKnife.bind(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
@@ -62,8 +70,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void configureNavigationView(){
-        this.mNavigationView = findViewById(R.id.activity_main_nav_view);
+        ButterKnife.bind(this);
         mNavigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void configureViewPager(){
+        ButterKnife.bind(this);
+        mPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
     }
 
     @Override
