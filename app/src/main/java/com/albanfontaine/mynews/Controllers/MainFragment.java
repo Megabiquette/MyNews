@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.albanfontaine.mynews.R;
+import com.albanfontaine.mynews.Utils.NetworkAsyncTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +18,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners {
 
     @BindView(R.id.fragment_main_rootview) LinearLayout mRootView;
     @BindView(R.id.fragment_main_recycler_view) RecyclerView mRecyclerView;
@@ -48,4 +49,18 @@ public class MainFragment extends Fragment {
         return result;
     }
 
+    @Override
+    public void onPreExecute() {
+
+    }
+
+    @Override
+    public void doInBackground() {
+
+    }
+
+    @Override
+    public void onPostExecute(String success) {
+
+    }
 }
