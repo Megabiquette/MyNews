@@ -1,5 +1,6 @@
 package com.albanfontaine.mynews.Controllers;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.albanfontaine.mynews.R;
 import com.albanfontaine.mynews.Views.PageAdapter;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Configuration of the differents views
         this.configureToolbar();
         this.configureDrawerLayout();
         this.configureNavigationView();
@@ -91,5 +94,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.toolbar_search:
+                Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
+                this.startActivity(searchIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
     }
 }
