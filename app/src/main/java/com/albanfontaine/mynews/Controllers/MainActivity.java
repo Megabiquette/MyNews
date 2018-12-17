@@ -1,5 +1,6 @@
 package com.albanfontaine.mynews.Controllers;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -103,14 +104,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
                 this.startActivity(searchIntent);
                 return true;
-             case R.id.toolbar_notifications:
-                 Intent notificationsIntent = new Intent(MainActivity.this, NotificationsActivity.class);
-                 this.startActivity(notificationsIntent);
-                 return true;
+            case R.id.toolbar_notifications:
+                Intent notificationsIntent = new Intent(MainActivity.this, NotificationsActivity.class);
+                this.startActivity(notificationsIntent);
+                return true;
+            case R.id.toolbar_help:
+
+                return true;
+            case R.id.toolbar_about:
+                this.showAboutDialog();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
 
-
+    private void showAboutDialog(){
+        // Builds an AlertDialog then shows it
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("About");
+        alert.setMessage("This app was made by\nAlban Fontaine");
+        alert.setPositiveButton("OK", null);
+        alert.show();
     }
 }
