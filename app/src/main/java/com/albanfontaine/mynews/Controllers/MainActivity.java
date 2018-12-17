@@ -103,6 +103,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
                 this.startActivity(searchIntent);
                 return true;
+             case R.id.toolbar_notifications:
+                 Intent notificationsIntent = new Intent(MainActivity.this, NotificationsActivity.class);
+                 this.startActivity(notificationsIntent);
+                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Controllers.SearchActivity">
+    tools:context=".Controllers.NotificationsActivity">
 
     <include
         layout="@layout/toolbar"
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/activity_search_field"
+        android:id="@+id/activity_notifications_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -26,55 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="25dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_date_begin" />
-            <Spinner
-                android:id="@+id/activity_search_spinner_begin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:theme="@style/ThemeOverlay.AppCompat.Light"
-                style="@style/Base.Widget.AppCompat.Spinner.Underlined" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_date_end" />
-            <Spinner
-                android:id="@+id/activity_search_spinner_end"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:theme="@style/ThemeOverlay.AppCompat.Light"
-                style="@style/Base.Widget.AppCompat.Spinner.Underlined" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp">
@@ -85,7 +37,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <CheckBox
-                android:id="@+id/activity_search_checkbox_arts"
+                android:id="@+id/activity_notifications_checkbox_arts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -94,7 +46,7 @@
                 android:text="@string/category_arts" />
 
             <CheckBox
-                android:id="@+id/activity_search_checkbox_business"
+                android:id="@+id/activity_notifications_checkbox_business"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -110,7 +62,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <CheckBox
-                android:id="@+id/activity_search_checkbox_politics"
+                android:id="@+id/activity_notifications_checkbox_politics"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -119,7 +71,7 @@
                 android:text="@string/category_politics"/>
 
             <CheckBox
-                android:id="@+id/activity_search_checkbox_travel"
+                android:id="@+id/activity_notifications_checkbox_travel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -128,17 +80,27 @@
                 android:paddingEnd="10dp"
                 android:text="@string/category_travel"/>
         </LinearLayout>
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/activity_search_button_search"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white"
-        android:text="@string/search_button"/>
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notifications_switch"/>
+
+        <Switch
+            android:id="@+id/activity_notifications_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:checked="true"/>
+    </RelativeLayout>
 
 </LinearLayout>
