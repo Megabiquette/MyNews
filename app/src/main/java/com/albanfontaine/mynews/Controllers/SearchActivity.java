@@ -12,8 +12,7 @@ import butterknife.ButterKnife;
 
 public class SearchActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
