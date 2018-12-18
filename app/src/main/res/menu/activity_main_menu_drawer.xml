@@ -3,22 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item
-        android:id="@+id/activity_main_drawer_top_stories"
-        android:title="@string/category_top_stories" />
-    <item
-        android:id="@+id/activity_main_drawer_most_popular"
-        android:title="@string/category_most_popular" />
-    <item
-        android:id="@+id/activity_main_drawer_arts"
-        android:title="@string/category_arts" />
-    <item
-        android:id="@+id/activity_main_drawer_business"
-        android:title="@string/category_business" />
-    <item
-        android:id="@+id/activity_main_drawer_politics"
-        android:title="@string/category_politics"/>
-    <item
-        android:id="@+id/activity_main_drawer_travel"
-        android:title="@string/category_travel" />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/activity_main_drawer_top_stories"
+            android:title="@string/category_top_stories" />
+        <item
+            android:id="@+id/activity_main_drawer_most_popular"
+            android:title="@string/category_most_popular" />
+        <item
+            android:id="@+id/activity_main_drawer_arts"
+            android:title="@string/category_arts" />
+        <item
+            android:id="@+id/activity_main_drawer_business"
+            android:title="@string/category_business" />
+        <item
+            android:id="@+id/activity_main_drawer_politics"
+            android:title="@string/category_politics"/>
+        <item
+            android:id="@+id/activity_main_drawer_travel"
+            android:title="@string/category_travel" />
+    </group>
+
 </menu>

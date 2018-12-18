@@ -24,16 +24,16 @@ public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners
     @BindView(R.id.fragment_main_recycler_view) RecyclerView mRecyclerView;
 
     // Create keys for our Bundle
-    private static final String KEY_POSITION="tab";
+    private static final String KEY_POSITION="position";
 
 
     public MainFragment() { }
 
-    public static MainFragment newInstance(int tab){
+    public static MainFragment newInstance(int position){
         MainFragment frag = new MainFragment();
 
         Bundle args = new Bundle();
-        args.putInt(KEY_POSITION, tab);
+        args.putInt(KEY_POSITION, position);
         frag.setArguments(args);
         return frag;
     }

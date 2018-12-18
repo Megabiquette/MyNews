@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.albanfontaine.mynews.R;
 import com.albanfontaine.mynews.Views.PageAdapter;
@@ -77,28 +76,70 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void configureNavigationView(){
         ButterKnife.bind(this);
         mNavigationView.setNavigationItemSelectedListener(this);
+        // Start with the first item highlighted
+        this.mNavigationView.getMenu().getItem(0).setChecked(true);
     }
 
     private void configureViewPager(){
         ButterKnife.bind(this);
-        mPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
+        mPager.setAdapter(new PageAdapter(getSupportFragmentManager(), mNavigationView));
         mTabs.setupWithViewPager(mPager);
         // Set tabs design
         mTabs.setTabMode(TabLayout.MODE_SCROLLABLE);
+        // Updates the Navigation Drawer highlighted item on tab change
+        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+            }
+            @Override
+            public void onPageSelected(int i) {
+                mNavigationView.getMenu().getItem(i).setChecked(true);
+            }
+            @Override
+            public void onPageScrollStateChanged(int i) {
+            }
+        });
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        switch (id){
-
+        // Changes the ViewPager to the selected tab from the Navigation Drawer
+        switch (item.getItemId()){
+            case R.id.activity_main_drawer_top_stories:
+                this.mPager.setCurrentItem(0);
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_viewpager, MainFragment.newInstance(0)).commit();
+                break;
+            case R.id.activity_main_drawer_most_popular:
+                this.mPager.setCurrentItem(1);
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_viewpager, MainFragment.newInstance(1)).commit();
+                break;
+            case R.id.activity_main_drawer_arts:
+                this.mPager.setCurrentItem(2);
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_viewpager, MainFragment.newInstance(2)).commit();
+                break;
+            case R.id.activity_main_drawer_business:
+                this.mPager.setCurrentItem(3);
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_viewpager, MainFragment.newInstance(3)).commit();
+                break;
+            case R.id.activity_main_drawer_politics:
+                this.mPager.setCurrentItem(4);
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_viewpager, MainFragment.newInstance(4)).commit();
+                break;
+            case R.id.activity_main_drawer_travel:
+                this.mPager.setCurrentItem(5);
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_viewpager, MainFragment.newInstance(5)).commit();
+                break;
+            default:
+                break;
         }
-
+        item.setChecked(true);
+        this.mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Toolbar icons
         switch (item.getItemId()){
             case R.id.toolbar_search:
                 Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
@@ -109,13 +150,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this.startActivity(notificationsIntent);
                 return true;
             case R.id.toolbar_help:
-
+                // TODO
                 return true;
             case R.id.toolbar_about:
                 this.showAboutDialog();
                 return true;
             default:
-                return super.onOptionsItemSelected(item);
+                return true;
         }
     }
 
