@@ -11,9 +11,8 @@ import com.albanfontaine.mynews.Controllers.MainFragment;
 public class PageAdapter extends FragmentPagerAdapter {
     private NavigationView mNavigationView;
 
-    public PageAdapter(FragmentManager mgr, NavigationView navigationView){
+    public PageAdapter(FragmentManager mgr){
         super(mgr);
-        mNavigationView = navigationView;
     }
 
     @Override
