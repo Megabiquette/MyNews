@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void configureViewPager(){
         ButterKnife.bind(this);
-        mPager.setAdapter(new PageAdapter(getSupportFragmentManager(), mNavigationView));
+        mPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
         mTabs.setupWithViewPager(mPager);
         // Set tabs design
         mTabs.setTabMode(TabLayout.MODE_SCROLLABLE);
