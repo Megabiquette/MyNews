@@ -28,14 +28,11 @@ public class NetworkAsyncTask extends  android.os.AsyncTask<String, Void, String
     @Override
     protected String doInBackground(String... url) {
         this.mCallback.get().doInBackground();
-        Log.e("TAG", "doInBackground_CLASS");
         return MyHttpUrlConnection.startHttpRequest(url[0]);
     }
     @Override
     protected void onPostExecute(String response) {
         super.onPostExecute(response);
         this.mCallback.get().onPostExecute(response);
-
-        Log.e("TAG", "onPostExecute_CLASS");
     }
 }

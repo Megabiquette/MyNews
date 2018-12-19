@@ -107,32 +107,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()){
             case R.id.activity_main_drawer_top_stories:
                 this.mPager.setCurrentItem(0);
-                this.getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_viewpager, MainFragment.newInstance(0)).commit();
                 break;
             case R.id.activity_main_drawer_most_popular:
                 this.mPager.setCurrentItem(1);
-                this.getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_viewpager, MainFragment.newInstance(1)).commit();
                 break;
             case R.id.activity_main_drawer_arts:
                 this.mPager.setCurrentItem(2);
-                this.getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_viewpager, MainFragment.newInstance(2)).commit();
                 break;
             case R.id.activity_main_drawer_business:
                 this.mPager.setCurrentItem(3);
-                this.getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_viewpager, MainFragment.newInstance(3)).commit();
                 break;
             case R.id.activity_main_drawer_politics:
                 this.mPager.setCurrentItem(4);
-                this.getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_viewpager, MainFragment.newInstance(4)).commit();
                 break;
             case R.id.activity_main_drawer_travel:
                 this.mPager.setCurrentItem(5);
-                this.getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_viewpager, MainFragment.newInstance(5)).commit();
                 break;
             default:
                 break;
         }
-
         item.setChecked(true);
         this.mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -140,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Toolbar icons
+        // Click on a Toolbar icon
         switch (item.getItemId()){
             case R.id.toolbar_search:
                 Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);

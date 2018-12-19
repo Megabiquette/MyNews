@@ -21,8 +21,7 @@ public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners
 
     @BindView(R.id.fragment_main_recycler_view) RecyclerView mRecyclerView;
     @BindView(R.id.fragment_main_progressBar) ProgressBar mProgressBar;
-    @BindView(R.id.frag_test)
-    TextView mTextView;
+    @BindView(R.id.frag_test) TextView mTextView;
 
     // Create keys for our Bundle
     private static final String KEY_POSITION="position";
@@ -58,19 +57,15 @@ public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners
     @Override
     public void onPreExecute() {
         this.mProgressBar.setVisibility(View.VISIBLE);
-        Log.e("TAG", "onPreExecute_FRAGMENT");
     }
 
     @Override
     public void doInBackground() {
-        Log.e("TAG", "doInBackground_FRAGMENT");
     }
 
     @Override
     public void onPostExecute(String response) {
         this.mProgressBar.setVisibility(View.GONE);
         this.mTextView.setText(response);
-        ((MainActivity) getActivity()).mPager.getAdapter().notifyDataSetChanged();
-        Log.e("TAG", "onPostExecute_FRAGMENT");
     }
 }
