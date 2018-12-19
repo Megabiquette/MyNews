@@ -24,6 +24,14 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    // Tabs as constants
+    private final int TAB_TOP_STORIES = 0;
+    private final int TAB_MOST_POPULAR = 1;
+    private final int TAB_ARTS = 2;
+    private final int TAB_BUSINESS = 3;
+    private final int TAB_POLITICS = 4;
+    private final int TAB_TRAVEL = 5;
+
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.activity_main_drawer_layout) DrawerLayout mDrawerLayout;
     @BindView(R.id.activity_main_nav_view) NavigationView mNavigationView;
@@ -106,22 +114,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Changes the ViewPager to the selected tab from the Navigation Drawer
         switch (item.getItemId()){
             case R.id.activity_main_drawer_top_stories:
-                this.mPager.setCurrentItem(0);
+                this.mPager.setCurrentItem(TAB_TOP_STORIES);
                 break;
             case R.id.activity_main_drawer_most_popular:
-                this.mPager.setCurrentItem(1);
+                this.mPager.setCurrentItem(TAB_MOST_POPULAR);
                 break;
             case R.id.activity_main_drawer_arts:
-                this.mPager.setCurrentItem(2);
+                this.mPager.setCurrentItem(TAB_ARTS);
                 break;
             case R.id.activity_main_drawer_business:
-                this.mPager.setCurrentItem(3);
+                this.mPager.setCurrentItem(TAB_BUSINESS);
                 break;
             case R.id.activity_main_drawer_politics:
-                this.mPager.setCurrentItem(4);
+                this.mPager.setCurrentItem(TAB_POLITICS);
                 break;
             case R.id.activity_main_drawer_travel:
-                this.mPager.setCurrentItem(5);
+                this.mPager.setCurrentItem(TAB_TRAVEL);
                 break;
             default:
                 break;

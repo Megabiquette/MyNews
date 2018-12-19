@@ -2,6 +2,7 @@ package com.albanfontaine.mynews.Controllers;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -43,12 +44,20 @@ public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners
         View result = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, result);
 
-        new NetworkAsyncTask(this).execute("https://api.github.com/users/JakeWharton/following");
-        Log.e("TAG", "createView");
+        // Gets which tab is currently viewed
+        int position = getArguments().getInt(KEY_POSITION, 0);
+
+        new NetworkAsyncTask(this).execute(buildRequest(position));
+
 
         return result;
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+    }
 
     //////////////////
     // HTTP REQUEST //
@@ -67,5 +76,38 @@ public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners
     public void onPostExecute(String response) {
         this.mProgressBar.setVisibility(View.GONE);
         this.mTextView.setText(response);
+    }
+
+    private String buildRequest(int position){
+        StringBuilder request = new StringBuilder();
+        if (position == 0){
+            // Top Stories
+            request.append("https://api.nytimes.com/svc/topstories/v2/home.json?api-key=190abb26a35547f29b03a63c6c5bf084");
+        } else if(position == 1){
+            // Most Popular
+            request.append("https://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json?api-key=190abb26a35547f29b03a63c6c5bf084");
+        } else{
+            request.append("http://api.nytimes.com/svc/search/v2/");
+            switch (position){
+                case 2: // Arts
+                    request.append("articlesearch.json?fq=news_desk:(\"Arts\")");
+                    break;
+                case 3: // Business
+                    request.append("articlesearch.json?fq=news_desk:(\"Business\")");
+                    break;
+                case 4: // Politics
+                    request.append("articlesearch.json?fq=news_desk:(\"Politics\")");
+                    break;
+                case 5: // Travel
+                    request.append("articlesearch.json?fq=news_desk:(\"Travel\")");
+                    break;
+            }
+            // Sort by newest and filter fields
+            request.append("&sort=newest&fl=web_url,snippet,news_desk,multimedia,pub_date&api-key=190abb26a35547f29b03a63c6c5bf084");
+        }
+        // Add API key
+        //request.append("&api-key=190abb26a35547f29b03a63c6c5bf084");
+
+        return request.toString();
     }
 }

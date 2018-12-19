@@ -31,11 +31,11 @@ public class MyHttpUrlConnection {
             }
             in.close();
         } catch (MalformedURLException e){
-            Log.e("TAG",  e.getMessage());
+            Log.e("Malformed URL",  e.getMessage());
         } catch (IOException e){
-            Log.e("TAG", e.getMessage());
+            Log.e("IO Exception", e.getMessage());
         } catch (Exception e){
-            Log.e("Tag", e.getMessage());
+            Log.e("Exception", e.getMessage());
         }
 
         return stringBuilder.toString();
