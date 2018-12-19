@@ -87,26 +87,24 @@ public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners
             // Most Popular
             request.append("https://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json?api-key=190abb26a35547f29b03a63c6c5bf084");
         } else{
-            request.append("http://api.nytimes.com/svc/search/v2/");
+            request.append("http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=news_desk:");
             switch (position){
                 case 2: // Arts
-                    request.append("articlesearch.json?fq=news_desk:(\"Arts\")");
+                    request.append("(\"Arts\")");
                     break;
                 case 3: // Business
-                    request.append("articlesearch.json?fq=news_desk:(\"Business\")");
+                    request.append("(\"Business\")");
                     break;
                 case 4: // Politics
-                    request.append("articlesearch.json?fq=news_desk:(\"Politics\")");
+                    request.append("(\"Politics\")");
                     break;
                 case 5: // Travel
-                    request.append("articlesearch.json?fq=news_desk:(\"Travel\")");
+                    request.append("(\"Travel\")");
                     break;
             }
             // Sort by newest and filter fields
             request.append("&sort=newest&fl=web_url,snippet,news_desk,multimedia,pub_date&api-key=190abb26a35547f29b03a63c6c5bf084");
         }
-        // Add API key
-        //request.append("&api-key=190abb26a35547f29b03a63c6c5bf084");
 
         return request.toString();
     }
