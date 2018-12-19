@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             default:
                 break;
         }
+
         item.setChecked(true);
         this.mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;

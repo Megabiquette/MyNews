@@ -1,13 +1,16 @@
 package com.albanfontaine.mynews.Utils;
 
+import android.util.Log;
+
 import java.lang.ref.WeakReference;
+
 
 public class NetworkAsyncTask extends  android.os.AsyncTask<String, Void, String> {
 
     public interface Listeners{
         void onPreExecute();
         void doInBackground();
-        void onPostExecute(String success);
+        void onPostExecute(String response);
     }
 
     private final WeakReference<Listeners> mCallback;
@@ -23,14 +26,16 @@ public class NetworkAsyncTask extends  android.os.AsyncTask<String, Void, String
     }
 
     @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-        this.mCallback.get().onPreExecute();
-    }
-
-    @Override
     protected String doInBackground(String... url) {
         this.mCallback.get().doInBackground();
-        return MyHttpUrlConnection.startHttpRequestion(url[0]);
+        Log.e("TAG", "doInBackground_CLASS");
+        return MyHttpUrlConnection.startHttpRequest(url[0]);
+    }
+    @Override
+    protected void onPostExecute(String response) {
+        super.onPostExecute(response);
+        this.mCallback.get().onPostExecute(response);
+
+        Log.e("TAG", "onPostExecute_CLASS");
     }
 }

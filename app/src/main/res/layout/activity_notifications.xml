@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp">
 
@@ -40,7 +41,6 @@
                 android:id="@+id/activity_notifications_checkbox_arts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:text="@string/category_arts" />
@@ -49,7 +49,6 @@
                 android:id="@+id/activity_notifications_checkbox_business"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar"
                 android:layout_marginTop="15dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
@@ -65,7 +64,6 @@
                 android:id="@+id/activity_notifications_checkbox_politics"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:text="@string/category_politics"/>
@@ -74,7 +72,6 @@
                 android:id="@+id/activity_notifications_checkbox_travel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar"
                 android:layout_marginTop="15dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
@@ -83,12 +80,19 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@android:color/darker_gray"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="15dp">
 
         <TextView
             android:layout_width="wrap_content"

@@ -1,5 +1,7 @@
 package com.albanfontaine.mynews.Utils;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +13,7 @@ import java.net.URL;
 // Handles connections
 public class MyHttpUrlConnection {
 
-    public static String startHttpRequestion(String urlString){
+    public static String startHttpRequest(String urlString){
         StringBuilder stringBuilder = new StringBuilder();
 
         try{
@@ -27,13 +29,15 @@ public class MyHttpUrlConnection {
             while ((line = reader.readLine()) != null){
                 stringBuilder.append(line);
             }
-        } catch (MalformedURLException exception){
-
-        } catch (IOException exception){
-
+            in.close();
+        } catch (MalformedURLException e){
+            Log.e("TAG",  e.getMessage());
+        } catch (IOException e){
+            Log.e("TAG", e.getMessage());
         } catch (Exception e){
-
+            Log.e("Tag", e.getMessage());
         }
+
         return stringBuilder.toString();
     }
 }
