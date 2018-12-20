@@ -4,22 +4,18 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ArticleSearch {
-
     @SerializedName("web_url")
     @Expose
     private String webUrl;
-    @SerializedName("snippet")
+    @SerializedName("headline")
     @Expose
-    private String snippet;
+    private Headline headline;
     @SerializedName("pub_date")
     @Expose
     private String pubDate;
     @SerializedName("news_desk")
     @Expose
     private String newsDesk;
-    @SerializedName("score")
-    @Expose
-    private Integer score;
 
     public String getWebUrl() {
         return webUrl;
@@ -29,12 +25,12 @@ public class ArticleSearch {
         this.webUrl = webUrl;
     }
 
-    public String getSnippet() {
-        return snippet;
+    public Headline getHeadline() {
+        return headline;
     }
 
-    public void setSnippet(String snippet) {
-        this.snippet = snippet;
+    public void setHeadline(Headline headline) {
+        this.headline = headline;
     }
 
     public String getPubDate() {
@@ -51,13 +47,5 @@ public class ArticleSearch {
 
     public void setNewsDesk(String newsDesk) {
         this.newsDesk = newsDesk;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
     }
 }
