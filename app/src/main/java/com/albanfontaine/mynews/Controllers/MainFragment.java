@@ -103,7 +103,7 @@ public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners
                     break;
             }
             // Sort by newest and filter fields
-            request.append("&sort=newest&fl=web_url,snippet,news_desk,pub_date&api-key=190abb26a35547f29b03a63c6c5bf084");
+            request.append("&sort=newest&fl=web_url,headline,news_desk,pub_date&api-key=190abb26a35547f29b03a63c6c5bf084");
         }
 
         return request.toString();
