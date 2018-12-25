@@ -64,7 +64,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    // Setup
+    ////////////////////
+    // CONFIGURATIONS //
+    ////////////////////
+
     private void configureToolbar(){
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);

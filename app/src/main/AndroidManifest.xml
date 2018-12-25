@@ -30,12 +30,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Controllers.MainActivity" />
         </activity>
-        <activity android:name=".Controllers.NotificationsActivity"
+        <activity
+            android:name=".Controllers.NotificationsActivity"
             android:label="Notifications"
             android:parentActivityName=".Controllers.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Controllers.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Controllers.WebViewActivity"
+            android:label="Read Article"
+            android:parentActivityName=".Controllers.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Controllers.MainActivity"/>
         </activity>
     </application>
 

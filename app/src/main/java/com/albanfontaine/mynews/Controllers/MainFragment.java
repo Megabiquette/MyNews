@@ -1,6 +1,7 @@
 package com.albanfontaine.mynews.Controllers;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -99,6 +100,10 @@ public class MainFragment extends Fragment {
         }
     }
 
+    ////////////////////
+    // CONFIGURATIONS //
+    ////////////////////
+    
     private void configureRecyclerView(){
         // Configures the RecyclerView and its components
         this.mArticles = new ArrayList<>();
@@ -112,7 +117,10 @@ public class MainFragment extends Fragment {
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-
+                        // Starts new activity to read the article
+                        Intent intent = new Intent(getContext(), WebViewActivity.class);
+                        intent.putExtra("ARTICLE_URL", mAdapter.getArticleUrl(position));
+                        startActivity(intent);
                     }
                 });
     }
@@ -180,6 +188,10 @@ public class MainFragment extends Fragment {
                     }
                 });
     }
+
+    ////////////////
+    // UI UPDATES //
+    ////////////////
 
     private void updateUIForTopStoriesArticles(ApiResponseTopStories response){
         for (ApiResponseTopStories.ArticleTopStories result : response.getResults()){

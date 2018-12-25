@@ -20,6 +20,6 @@
     <string name="search_date_begin">Begin Date</string>
     <string name="search_date_end">End Date</string>
     <string name="search_button">SEARCH</string>
-    
+
     <string name="notifications_switch">Enable notifications (once per day)</string>
 </resources>
