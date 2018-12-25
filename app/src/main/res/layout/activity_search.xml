@@ -11,16 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/activity_search_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:paddingBottom="15dp"
-        android:hint="@string/search_field_hint"
-        android:inputType="text" />
+    <include layout="@layout/search_field" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,61 +69,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:baselineAligned="false">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <CheckBox
-                android:id="@+id/activity_search_checkbox_arts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:text="@string/category_arts" />
-
-            <CheckBox
-                android:id="@+id/activity_search_checkbox_business"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:text="@string/category_business"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <CheckBox
-                android:id="@+id/activity_search_checkbox_politics"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:text="@string/category_politics"/>
-
-            <CheckBox
-                android:id="@+id/activity_search_checkbox_travel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:text="@string/category_travel"/>
-        </LinearLayout>
-    </LinearLayout>
+    <include layout="@layout/categories_checkbox"/>
 
     <Button
         android:id="@+id/activity_search_button_search"

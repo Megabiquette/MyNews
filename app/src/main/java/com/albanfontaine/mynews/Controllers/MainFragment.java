@@ -17,6 +17,7 @@ import com.albanfontaine.mynews.Models.ApiResponseSearch;
 import com.albanfontaine.mynews.Models.ApiResponseTopStories;
 import com.albanfontaine.mynews.Models.Article;
 import com.albanfontaine.mynews.R;
+import com.albanfontaine.mynews.Utils.ItemClickSupport;
 import com.albanfontaine.mynews.Utils.NYTimesStreams;
 import com.albanfontaine.mynews.Views.ArticleAdapter;
 
@@ -56,7 +57,9 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, result);
+
         this.configureRecyclerView();
+        this.configureOnClickRecyclerView();
 
         // Gets which tab is currently viewed
         int position = getArguments().getInt(KEY_POSITION, 0);
@@ -102,6 +105,16 @@ public class MainFragment extends Fragment {
         this.mAdapter = new ArticleAdapter(this.mArticles);
         this.mRecyclerView.setAdapter(this.mAdapter);
         this.mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    private void configureOnClickRecyclerView(){
+        ItemClickSupport.addTo(mRecyclerView, R.layout.fragment_main_item)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+
+                    }
+                });
     }
 
     ///////////////////

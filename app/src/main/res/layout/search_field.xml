@@ -1,0 +1,11 @@
+<EditText
+    android:id="@+id/search_field"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="15dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginEnd="15dp"
+    android:paddingBottom="15dp"
+    android:hint="@string/search_field_hint"
+    android:inputType="text"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
