@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.albanfontaine.mynews.Models.Article;
 import com.albanfontaine.mynews.R;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -15,7 +16,7 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.fragment_main_item_thumbnail) ImageView mThumbnail;
     @BindView(R.id.fragment_main_item_section) TextView mTextSection;
     @BindView(R.id.fragment_main_item_date) TextView mTextDate;
-    @BindView(R.id.fragment_main_item_snippet) TextView mTextSnippet;
+    @BindView(R.id.fragment_main_item_title) TextView mTextTitle;
 
     public ArticleViewHolder(View itemView){
         super(itemView);
@@ -23,12 +24,19 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void updateWithArticle(Article article){
-        if(article.getThumbnail().isEmpty()){
-            this.mThumbnail.setVisibility(View.GONE);
-        }
-        //this.mImageThumbnail
         this.mTextSection.setText(article.getSection());
         this.mTextDate.setText(article.getDate());
-        this.mTextSnippet.setText(article.getTitle());
+        // Checks if there's a thumbnail for this article
+        if(article.getThumbnail().isEmpty()){
+            Picasso.with(mThumbnail.getContext()).load(R.drawable.no_image).into(mThumbnail);
+        }else{
+            Picasso.with(mThumbnail.getContext()).load(article.getThumbnail()).into(mThumbnail);
+        }
+        // Trims title if it's too long
+        if(article.getTitle().length() > 70){
+            this.mTextTitle.setText(article.getTitle().substring(0,68)+"...");
+        }else{
+            this.mTextTitle.setText(article.getTitle());
+        }
     }
 }

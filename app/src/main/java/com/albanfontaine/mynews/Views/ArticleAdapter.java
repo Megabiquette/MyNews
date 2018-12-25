@@ -14,10 +14,10 @@ import java.util.List;
 
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
 
-    private List<Article> articles;
+    private List<Article> mArticles;
 
     public ArticleAdapter(List<Article> articles){
-        this.articles = articles;
+        this.mArticles = articles;
     }
 
     @NonNull
@@ -34,13 +34,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
     // Updates ViewHolder with an article
     @Override
     public void onBindViewHolder(@NonNull ArticleViewHolder viewHolder, int position) {
-        viewHolder.updateWithArticle(this.articles.get(position));
+        viewHolder.updateWithArticle(this.mArticles.get(position));
     }
 
     // Returns the total count of items in the list
-
     @Override
     public int getItemCount() {
-        return this.articles.size();
+        return this.mArticles.size();
     }
 }
