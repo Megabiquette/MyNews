@@ -1,7 +1,10 @@
 package com.albanfontaine.mynews.Controllers;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.albanfontaine.mynews.Models.ApiResponseMostPopuplar;
 import com.albanfontaine.mynews.Models.ApiResponseSearch;
@@ -34,7 +38,7 @@ public class MainFragment extends Fragment {
 
     @BindView(R.id.fragment_main_recycler_view) RecyclerView mRecyclerView;
     @BindView(R.id.fragment_main_progressBar) ProgressBar mProgressBar;
-    @BindView(R.id.frag_test) TextView mTextView;
+    @BindView(R.id.fragment_main_connection) TextView mTextViewConnection;
 
     // Create keys for our Bundle
     private static final String KEY_POSITION="position";
@@ -62,29 +66,39 @@ public class MainFragment extends Fragment {
         this.configureRecyclerView();
         this.configureOnClickRecyclerView();
 
-        // Gets which tab is currently viewed
-        int position = getArguments().getInt(KEY_POSITION, 0);
-        // Execute request according to the tab
-        switch (position){
-            case 0:
-                this.executeTopStoriesRequest();
-                break;
-            case 1:
-                this.executeMostPopularRequest();
-                break;
-            case 2:
-                this.executeSearchRequest("news_desk:(\"Arts\")");
-                break;
-            case 3:
-                this.executeSearchRequest("news_desk:(\"Business\")");
-                break;
-            case 4:
-                this.executeSearchRequest("news_desk:(\"Politics\")");
-                break;
-            case 5:
-                this.executeSearchRequest("news_desk:(\"Travel\")");
-                break;
+        // Checks the internet connection
+        if(!isConnectedToInternet()){
+            // No internet
+            mTextViewConnection.setVisibility(View.VISIBLE);
+            mProgressBar.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.GONE);
+        }else{
+            // Gets which tab is currently viewed
+            int position = getArguments().getInt(KEY_POSITION, 0);
+            // Execute request according to the tab
+            switch (position){
+                case 0:
+                    this.executeTopStoriesRequest();
+                    break;
+                case 1:
+                    this.executeMostPopularRequest();
+                    break;
+                case 2:
+                    this.executeCategoryRequest("news_desk:(\"Arts\")");
+                    break;
+                case 3:
+                    this.executeCategoryRequest("news_desk:(\"Business\")");
+                    break;
+                case 4:
+                    this.executeCategoryRequest("news_desk:(\"Politics\")");
+                    break;
+                case 5:
+                    this.executeCategoryRequest("news_desk:(\"Travel\")");
+                    break;
+            }
         }
+
+
         return result;
     }
 
@@ -103,7 +117,7 @@ public class MainFragment extends Fragment {
     ////////////////////
     // CONFIGURATIONS //
     ////////////////////
-    
+
     private void configureRecyclerView(){
         // Configures the RecyclerView and its components
         this.mArticles = new ArrayList<>();
@@ -117,10 +131,17 @@ public class MainFragment extends Fragment {
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        // Starts new activity to read the article
-                        Intent intent = new Intent(getContext(), WebViewActivity.class);
-                        intent.putExtra("ARTICLE_URL", mAdapter.getArticleUrl(position));
-                        startActivity(intent);
+                        // Checks internet connection
+                        if(!isConnectedToInternet()){
+                            // No internet
+                            Toast.makeText(getContext(), getResources().getString(R.string.no_internet),
+                                    Toast.LENGTH_LONG).show();
+                        }else{
+                            // Starts new activity to read the article
+                            Intent intent = new Intent(getContext(), WebViewActivity.class);
+                            intent.putExtra("ARTICLE_URL", mAdapter.getArticleUrl(position));
+                            startActivity(intent);
+                        }
                     }
                 });
     }
@@ -169,12 +190,12 @@ public class MainFragment extends Fragment {
                 });
     }
 
-    private void executeSearchRequest(String category){
-        this.mDisposable = NYTimesStreams.streamFetchSearchArticles(category)
+    private void executeCategoryRequest(String category){
+        this.mDisposable = NYTimesStreams.streamFetchCategoryArticles(category)
                 .subscribeWith(new DisposableObserver<ApiResponseSearch>(){
                     @Override
                     public void onNext(ApiResponseSearch apiResponseSearch) {
-                        updateUIForSearchArticles(apiResponseSearch, category);
+                        updateUIForCategoryArticles(apiResponseSearch);
                     }
 
                     @Override
@@ -227,9 +248,9 @@ public class MainFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
-    private void updateUIForSearchArticles(ApiResponseSearch response, String category){
+    private void updateUIForCategoryArticles(ApiResponseSearch response){
         for (ApiResponseSearch.ArticleSearch result : response.getResponse().getDocs()){
-            String section = result.getSection_name();
+            String section = result.getNewsDesk();
             String date = formatDate(result.getPubDate());
             String title = result.getHeadline().getMain();
             String url = result.getWebUrl();
@@ -239,9 +260,21 @@ public class MainFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
+    ///////////
+    // UTILS //
+    ///////////
+
+    // Puts the date in DD/MM/YY format
     private String formatDate(String date){
-        // Puts the date in DD/MM/YY format
         return date.substring(8, 10)+"/"+date.substring(5, 7)+"/"+date.substring(2,4);
+    }
+
+    // Checks the internet connection
+    private boolean isConnectedToInternet(){
+        ConnectivityManager cm =
+                (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo network = cm.getActiveNetworkInfo();
+        return network != null && network.isConnectedOrConnecting();
     }
 
 }

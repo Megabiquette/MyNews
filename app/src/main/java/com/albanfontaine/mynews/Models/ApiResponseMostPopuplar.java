@@ -38,36 +38,21 @@ public class ApiResponseMostPopuplar {
         public String getUrl() {
             return url;
         }
-        public void setUrl(String url) {
-            this.url = url;
-        }
 
         public String getSection() {
             return section;
-        }
-        public void setSection(String section) {
-            this.section = section;
         }
 
         public String getTitle() {
             return title;
         }
-        public void setTitle(String title) {
-            this.title = title;
-        }
 
         public String getPublishedDate() {
             return publishedDate;
         }
-        public void setPublishedDate(String publishedDate) {
-            this.publishedDate = publishedDate;
-        }
 
         public List<Medium> getMedia() {
             return media;
-        }
-        public void setMedia(List<Medium> media) {
-            this.media = media;
         }
     }
 
@@ -79,9 +64,6 @@ public class ApiResponseMostPopuplar {
         public List<MediaMetadatum> getMediaMetadata() {
             return mediaMetadata;
         }
-        public void setMediaMetadata(List<MediaMetadatum> mediaMetadata) {
-            this.mediaMetadata = mediaMetadata;
-        }
     }
 
     public class MediaMetadatum {
@@ -91,9 +73,6 @@ public class ApiResponseMostPopuplar {
 
         public String getUrl() {
             return url;
-        }
-        public void setUrl(String url) {
-            this.url = url;
         }
     }
 

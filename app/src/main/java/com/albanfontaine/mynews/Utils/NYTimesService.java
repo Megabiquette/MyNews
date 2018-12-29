@@ -15,14 +15,23 @@ public interface NYTimesService {
 
     String API_KEY = "190abb26a35547f29b03a63c6c5bf084";
 
+    // Top Stories
     @GET("topstories/v2/home.json?api-key="+API_KEY)
-    Observable<ApiResponseTopStories> getTopStoriesArticles();
+    Observable<ApiResponseTopStories> fetchTopStoriesArticles();
 
+    // Most Popular
     @GET("mostpopular/v2/mostviewed/all-sections/7.json?api-key="+API_KEY)
-    Observable<ApiResponseMostPopuplar> getMostPopularArticles();
+    Observable<ApiResponseMostPopuplar> fetchMostPopularArticles();
 
-    @GET("search/v2/articlesearch.json?sort=newest&fl=web_url,headline,section_name,pub_date&api-key="+API_KEY)
-    Observable<ApiResponseSearch> getSearchArticles(@Query("fq") String section);
+    // Categories
+    @GET("search/v2/articlesearch.json?sort=newest&fl=web_url,headline,news_desk,section_name,pub_date&api-key="+API_KEY)
+    Observable<ApiResponseSearch> fetchCategoryArticles(@Query("fq") String section);
+
+    // Search activity
+    @GET("search/v2/articlesearch.json?sort=newest&fl=web_url,headline,section_name,news_desk,pub_date&api-key="+API_KEY)
+    Observable<ApiResponseSearch> fetchSearchArticles(@Query("q") String query,
+                                                    @Query("begin_date") String beginDate,
+                                                    @Query("ebd_date") String endDate);
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")
