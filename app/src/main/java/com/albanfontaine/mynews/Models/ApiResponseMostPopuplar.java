@@ -13,9 +13,6 @@ public class ApiResponseMostPopuplar {
     public List<ArticleMostPopular> getResults() {
         return results;
     }
-    public void setResults(List<ArticleMostPopular> results) {
-        this.results = results;
-    }
 
 
     public class ArticleMostPopular {

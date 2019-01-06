@@ -97,8 +97,6 @@ public class MainFragment extends Fragment {
                     break;
             }
         }
-
-
         return result;
     }
 

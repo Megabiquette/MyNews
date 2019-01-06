@@ -17,17 +17,12 @@ public class Article {
     }
 
     public String getSection() { return mSection; }
-    public void setSection(String section) { mSection = section; }
 
     public String getDate() { return mDate; }
-    public void setDate(String date) { mDate = date; }
 
     public String getTitle() { return mTitle; }
-    public void setTitle(String title) { mTitle = title; }
 
     public String getUrl() { return mUrl; }
-    public void setUrl(String url) { mUrl = url; }
 
     public String getThumbnail() { return mThumbnail; }
-    public void setThumbnail(String thumbnail) { mThumbnail = thumbnail; }
 }

@@ -30,6 +30,7 @@ public interface NYTimesService {
     // Search activity
     @GET("search/v2/articlesearch.json?sort=newest&fl=web_url,headline,section_name,news_desk,pub_date&api-key="+API_KEY)
     Observable<ApiResponseSearch> fetchSearchArticles(@Query("q") String query,
+                                                      @Query("fq") String section,
                                                     @Query("begin_date") String beginDate,
                                                     @Query("ebd_date") String endDate);
 

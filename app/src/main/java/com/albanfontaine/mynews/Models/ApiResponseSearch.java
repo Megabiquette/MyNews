@@ -11,7 +11,6 @@ public class ApiResponseSearch {
     private Response response;
 
     public Response getResponse() { return response; }
-    public void setResponse(Response response) { this.response = response; }
 
 
     public class Response {
@@ -21,9 +20,6 @@ public class ApiResponseSearch {
 
         public List<ArticleSearch> getDocs() {
             return docs;
-        }
-        public void setDocs(List<ArticleSearch> docs) {
-            this.docs = docs;
         }
     }
 

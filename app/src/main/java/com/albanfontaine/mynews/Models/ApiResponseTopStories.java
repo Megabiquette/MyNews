@@ -13,9 +13,6 @@ public class ApiResponseTopStories {
     public List<ArticleTopStories> getResults() {
         return results;
     }
-    public void setResults(List<ArticleTopStories> results) {
-        this.results = results;
-    }
 
 
     public class ArticleTopStories {
