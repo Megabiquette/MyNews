@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -81,10 +80,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 datePicker.show();
                 break;
             case R.id.activity_search_button_search:
-                if(mSearchField.getText().toString().trim().isEmpty()){
-                    Toast.makeText(this,"You must enter a term to search for", Toast.LENGTH_LONG).show();
-                    mSearchField.requestFocus();
-                }else{
+                if(parametersAreValid()) {
                     this.gatherParametersAndLaunchResultActivity();
                 }
                 break;
@@ -94,11 +90,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private void gatherParametersAndLaunchResultActivity(){
         // Gets the parameters for the query
         String query = mSearchField.getText().toString().trim();
-        String category;
-        if(!mCheckBoxArts.isChecked() && !mCheckBoxBusiness.isChecked() && !mCheckBoxPolitics.isChecked() && !mCheckBoxTravel.isChecked()){
-            category = "";
-        } else{
-            category = "news_desk:(";
+        String category = "news_desk:(";
             if (mCheckBoxArts.isChecked())
                 category += "\"Arts\" ";
             if (mCheckBoxBusiness.isChecked())
@@ -108,11 +100,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             if (mCheckBoxTravel.isChecked())
                 category += "\"Travel\"";
             category += ")";
-        }
-        Log.e("query", query);
-        Log.e("category", category);
-        Log.e("begin date", mBeginDate);
-        Log.e("end date", mEndDate);
 
         // Launch the request in another activity
         Intent intent = new Intent(this, SearchResultActivity.class);
@@ -121,6 +108,20 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         intent.putExtra(BEGIN_DATE, mBeginDate);
         intent.putExtra(END_DATE, mEndDate);
         startActivity(intent);
+    }
+
+    private boolean parametersAreValid(){
+        if(mSearchField.getText().toString().trim().isEmpty()){
+            Toast.makeText(this,"You must enter a term to search for", Toast.LENGTH_LONG).show();
+            mSearchField.requestFocus();
+            return false;
+        }
+        if(!mCheckBoxArts.isChecked() && !mCheckBoxBusiness.isChecked() &&
+                !mCheckBoxPolitics.isChecked() && !mCheckBoxTravel.isChecked()){
+            Toast.makeText(this,"You must select at least  one category", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
 
