@@ -16,7 +16,6 @@ public class NYTimesStreams {
 
     public static Observable<ApiResponseTopStories> streamFetchTopStoriesArticles(){
         NYTimesService nytService = NYTimesService.retrofit.create(NYTimesService.class);
-        Log.e("STREAM", "TS");
         return nytService.fetchTopStoriesArticles()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -25,8 +24,6 @@ public class NYTimesStreams {
 
     public static Observable<ApiResponseMostPopuplar> streamFetchMostPopularArticles(){
         NYTimesService nytService = NYTimesService.retrofit.create(NYTimesService.class);
-        Log.e("STREAM", "MP");
-
         return nytService.fetchMostPopularArticles()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -34,9 +31,16 @@ public class NYTimesStreams {
     }
 
     public static Observable<ApiResponseSearch> streamFetchCategoryArticles(String section){
-        Log.e("STREAM", "SEARCH");
         NYTimesService nytService = NYTimesService.retrofit.create(NYTimesService.class);
         return nytService.fetchCategoryArticles(section)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(10, TimeUnit.SECONDS);
+    }
+
+    public static Observable<ApiResponseSearch> streamFetchSearchArticles(String query, String category, String beginDate, String endDate){
+        NYTimesService nytService = NYTimesService.retrofit.create(NYTimesService.class);
+        return nytService.fetchSearchArticles(query, category, beginDate, endDate)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);

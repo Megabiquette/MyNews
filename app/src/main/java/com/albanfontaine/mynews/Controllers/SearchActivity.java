@@ -1,20 +1,19 @@
 package com.albanfontaine.mynews.Controllers;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.albanfontaine.mynews.R;
 
@@ -34,6 +33,15 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     @BindView(R.id.checkbox_business) CheckBox mCheckBoxBusiness;
     @BindView(R.id.checkbox_politics) CheckBox mCheckBoxPolitics;
     @BindView(R.id.checkbox_travel) CheckBox mCheckBoxTravel;
+
+    // Keys for the Bundle
+    private static final String QUERY = "query";
+    private static final String CATEGORY = "category";
+    private static final String BEGIN_DATE = "beginDate";
+    private static final String END_DATE = "endDate";
+
+    private String mBeginDate = "";
+    private String mEndDate = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,21 +81,59 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 datePicker.show();
                 break;
             case R.id.activity_search_button_search:
-
+                if(mSearchField.getText().toString().trim().isEmpty()){
+                    Toast.makeText(this,"You must enter a term to search for", Toast.LENGTH_LONG).show();
+                    mSearchField.requestFocus();
+                }else{
+                    this.gatherParametersAndLaunchResultActivity();
+                }
                 break;
         }
     }
 
+    private void gatherParametersAndLaunchResultActivity(){
+        // Gets the parameters for the query
+        String query = mSearchField.getText().toString().trim();
+        String category;
+        if(!mCheckBoxArts.isChecked() && !mCheckBoxBusiness.isChecked() && !mCheckBoxPolitics.isChecked() && !mCheckBoxTravel.isChecked()){
+            category = "";
+        } else{
+            category = "news_desk:(";
+            if (mCheckBoxArts.isChecked())
+                category += "\"Arts\" ";
+            if (mCheckBoxBusiness.isChecked())
+                category += "\"Business\" ";
+            if (mCheckBoxPolitics.isChecked())
+                category += "\"Politics\" ";
+            if (mCheckBoxTravel.isChecked())
+                category += "\"Travel\"";
+            category += ")";
+        }
+        Log.e("query", query);
+        Log.e("category", category);
+        Log.e("begin date", mBeginDate);
+        Log.e("end date", mEndDate);
+
+        // Launch the request in another activity
+        Intent intent = new Intent(this, SearchResultActivity.class);
+        intent.putExtra(QUERY, query);
+        intent.putExtra(CATEGORY, category);
+        intent.putExtra(BEGIN_DATE, mBeginDate);
+        intent.putExtra(END_DATE, mEndDate);
+        startActivity(intent);
+    }
+
+
     ////////////////////////////////////
     // Listeners for the date pickers //
     ////////////////////////////////////
-    
+
     private DatePickerDialog.OnDateSetListener datePickerListenerBegin
             = new DatePickerDialog.OnDateSetListener() {
 
         public void onDateSet(DatePicker view, int year,
                               int month, int day) {
-            mSpinnerBegin.setText(day+"/"+(month+1)+"/"+year);
+            mBeginDate = processDate(year, month, day, mSpinnerBegin);
         }
     };
 
@@ -96,8 +142,16 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         public void onDateSet(DatePicker view, int year,
                               int month, int day) {
-            mSpinnerEnd.setText(day+"/"+(month+1)+"/"+year);
+            mEndDate = processDate(year, month, day, mSpinnerEnd);
         }
     };
+
+    private String processDate(int yearInt, int monthInt, int dayInt, TextView spinner){
+        String year = Integer.toString(yearInt);
+        String month = (monthInt+1 < 10) ? "0" + Integer.toString(monthInt+1) : Integer.toString(monthInt+1);
+        String day = (dayInt < 10) ? "0" + Integer.toString(dayInt) : Integer.toString(dayInt);
+        spinner.setText(day+"/"+month+"/"+year);
+        return year+month+day;
+    }
 
 }

@@ -40,8 +40,9 @@ public class MainFragment extends Fragment {
     @BindView(R.id.fragment_main_progressBar) ProgressBar mProgressBar;
     @BindView(R.id.fragment_main_connection) TextView mTextViewConnection;
 
-    // Create keys for our Bundle
-    private static final String KEY_POSITION="position";
+    // Key for the Bundle
+    private static final String KEY_POSITION = "position";
+
     private Disposable mDisposable;
     private List<Article> mArticles;
     private ArticleAdapter mAdapter;
