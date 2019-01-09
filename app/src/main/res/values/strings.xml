@@ -25,4 +25,5 @@
 
     <string name="notifications_switch">Enable notifications (once per day)</string>
 
+    <string name="new_york_times_dns">https://www.nytimes.com/</string>
 </resources>

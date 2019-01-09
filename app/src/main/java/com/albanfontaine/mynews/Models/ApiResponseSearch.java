@@ -16,15 +16,13 @@ public class ApiResponseSearch {
     public class Response {
         @SerializedName("docs")
         @Expose
-        private List<ArticleSearch> docs = null;
+        private List<Doc> docs = null;
 
-        public List<ArticleSearch> getDocs() {
-            return docs;
-        }
+        public List<Doc> getDocs() { return docs; }
     }
 
 
-    public class ArticleSearch {
+    public class Doc {
         @SerializedName("web_url")
         @Expose
         private String webUrl;
@@ -37,9 +35,9 @@ public class ApiResponseSearch {
         @SerializedName("news_desk")
         @Expose
         private String news_desk;
-        @SerializedName("section_name")
+        @SerializedName("multimedia")
         @Expose
-        private String section_name;
+        private List<Multimedium> multimedia = null;
 
         public String getWebUrl() {
             return webUrl;
@@ -47,13 +45,11 @@ public class ApiResponseSearch {
 
         public Headline getHeadline() { return headline; }
 
-        public String getPubDate() {
-            return pubDate;
-        }
+        public String getPubDate() {return pubDate; }
 
         public String getNewsDesk() { return news_desk; }
 
-        public String getSection_name() { return section_name; }
+        public List<Multimedium> getMultimedia() { return multimedia; }
         }
 
 
@@ -62,9 +58,16 @@ public class ApiResponseSearch {
         @Expose
         private String main;
 
-        public String getMain() {
-            return main;
-        }
+        public String getMain() { return main; }
+    }
+
+    public class Multimedium {
+
+        @SerializedName("url")
+        @Expose
+        private String url;
+
+        public String getUrl() { return url; }
     }
 
 }

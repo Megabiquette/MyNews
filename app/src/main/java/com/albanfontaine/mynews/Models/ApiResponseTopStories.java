@@ -8,14 +8,14 @@ import java.util.List;
 public class ApiResponseTopStories {
     @SerializedName("results")
     @Expose
-    private List<ArticleTopStories> results = null;
+    private List<Result> results = null;
 
-    public List<ArticleTopStories> getResults() {
+    public List<Result> getResults() {
         return results;
     }
 
 
-    public class ArticleTopStories {
+    public class Result {
         @SerializedName("section")
         @Expose
         private String section;

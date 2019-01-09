@@ -8,14 +8,14 @@ import java.util.List;
 public class ApiResponseMostPopuplar {
     @SerializedName("results")
     @Expose
-    private List<ArticleMostPopular> results = null;
+    private List<Result> results = null;
 
-    public List<ArticleMostPopular> getResults() {
+    public List<Result> getResults() {
         return results;
     }
 
 
-    public class ArticleMostPopular {
+    public class Result {
         @SerializedName("url")
         @Expose
         private String url;

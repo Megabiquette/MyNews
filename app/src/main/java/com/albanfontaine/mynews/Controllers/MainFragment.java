@@ -214,7 +214,7 @@ public class MainFragment extends Fragment {
     ////////////////
 
     private void updateUIForTopStoriesArticles(ApiResponseTopStories response){
-        for (ApiResponseTopStories.ArticleTopStories result : response.getResults()){
+        for (ApiResponseTopStories.Result result : response.getResults()){
             // Creates an Article object
             String section = result.getSection();
             if(!result.getSubsection().isEmpty()){
@@ -233,7 +233,7 @@ public class MainFragment extends Fragment {
     }
 
     private void updateUIForMostPopularArticles(ApiResponseMostPopuplar response){
-        for (ApiResponseMostPopuplar.ArticleMostPopular result : response.getResults()){
+        for (ApiResponseMostPopuplar.Result result : response.getResults()){
             String section = result.getSection();
             String date = formatDate(result.getPublishedDate());
             String title = result.getTitle();
@@ -248,12 +248,15 @@ public class MainFragment extends Fragment {
     }
 
     private void updateUIForCategoryArticles(ApiResponseSearch response){
-        for (ApiResponseSearch.ArticleSearch result : response.getResponse().getDocs()){
+        for (ApiResponseSearch.Doc result : response.getResponse().getDocs()){
             String section = result.getNewsDesk();
             String date = formatDate(result.getPubDate());
             String title = result.getHeadline().getMain();
             String url = result.getWebUrl();
             String thumbnail = "";
+            if(!result.getMultimedia().isEmpty()){
+                thumbnail = getResources().getString(R.string.new_york_times_dns) + result.getMultimedia().get(2).getUrl();
+            }
             mArticles.add(new Article(section, date, title, url, thumbnail));
         }
         mAdapter.notifyDataSetChanged();

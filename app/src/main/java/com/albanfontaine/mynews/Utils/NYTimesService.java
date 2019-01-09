@@ -24,11 +24,11 @@ public interface NYTimesService {
     Observable<ApiResponseMostPopuplar> fetchMostPopularArticles();
 
     // Categories
-    @GET("search/v2/articlesearch.json?sort=newest&fl=web_url,headline,news_desk,section_name,pub_date&api-key="+API_KEY)
+    @GET("search/v2/articlesearch.json?sort=newest&fl=web_url,headline,multimedia,news_desk,pub_date&api-key="+API_KEY)
     Observable<ApiResponseSearch> fetchCategoryArticles(@Query("fq") String section);
 
     // Search activity
-    @GET("search/v2/articlesearch.json?sort=newest&fl=web_url,headline,section_name,news_desk,pub_date&api-key="+API_KEY)
+    @GET("search/v2/articlesearch.json?sort=newest&fl=web_url,headline,multimedia,news_desk,pub_date&api-key="+API_KEY)
     Observable<ApiResponseSearch> fetchSearchArticles(@Query("q") String query,
                                                       @Query("fq") String section,
                                                     @Query("begin_date") String beginDate,

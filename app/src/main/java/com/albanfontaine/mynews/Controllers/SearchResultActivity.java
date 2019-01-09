@@ -41,6 +41,8 @@ public class SearchResultActivity extends AppCompatActivity {
     private static final String BEGIN_DATE = "beginDate";
     private static final String END_DATE = "endDate";
 
+    private static final String IMAGE_BASE_URL = "https://www.nytimes.com/";
+
     private Disposable mDisposable;
     private List<Article> mArticles;
     private ArticleAdapter mAdapter;
@@ -102,12 +104,15 @@ public class SearchResultActivity extends AppCompatActivity {
     }
 
     private void updateUIForSearchArticles(ApiResponseSearch response){
-        for (ApiResponseSearch.ArticleSearch result : response.getResponse().getDocs()){
+        for (ApiResponseSearch.Doc result : response.getResponse().getDocs()){
             String section = result.getNewsDesk();
             String date = formatDate(result.getPubDate());
             String title = result.getHeadline().getMain();
             String url = result.getWebUrl();
             String thumbnail = "";
+            if(!result.getMultimedia().isEmpty()){
+                thumbnail = getResources().getString(R.string.new_york_times_dns) + result.getMultimedia().get(2).getUrl();
+            }
             mArticles.add(new Article(section, date, title, url, thumbnail));
         }
         mAdapter.notifyDataSetChanged();
