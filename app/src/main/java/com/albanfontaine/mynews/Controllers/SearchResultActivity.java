@@ -33,15 +33,13 @@ public class SearchResultActivity extends AppCompatActivity {
 
     @BindView(R.id.fragment_main_recycler_view) RecyclerView mRecyclerView;
     @BindView(R.id.fragment_main_progressBar) ProgressBar mProgressBar;
-    @BindView(R.id.fragment_main_connection) TextView mTextViewConnection;
+    @BindView(R.id.fragment_main_text_info) TextView mTextViewInfo;
 
     // Keys for the Bundle
     private static final String QUERY = "query";
     private static final String CATEGORY = "category";
     private static final String BEGIN_DATE = "beginDate";
     private static final String END_DATE = "endDate";
-
-    private static final String IMAGE_BASE_URL = "https://www.nytimes.com/";
 
     private Disposable mDisposable;
     private List<Article> mArticles;
@@ -69,7 +67,8 @@ public class SearchResultActivity extends AppCompatActivity {
 
         if(!isConnectedToInternet()){
             // No internet
-            mTextViewConnection.setVisibility(View.VISIBLE);
+            mTextViewInfo.setVisibility(View.VISIBLE);
+            mTextViewInfo.setText(getResources().getString(R.string.no_internet));
             mProgressBar.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.GONE);
         }else {
@@ -116,6 +115,12 @@ public class SearchResultActivity extends AppCompatActivity {
             mArticles.add(new Article(section, date, title, url, thumbnail));
         }
         mAdapter.notifyDataSetChanged();
+
+        // In case no article was found
+        if(response.getResponse().getDocs().isEmpty()){
+            mTextViewInfo.setText(R.string.no_article_found);
+            mTextViewInfo.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

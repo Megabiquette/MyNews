@@ -16,7 +16,8 @@
     <string name="toolbar_menu_help">Help</string>
     <string name="toolbar_menu_about">About</string>
 
-    <string name="no_internet">NO INTERNET CONNECTION DETECTED</string>
+    <string name="no_internet">No internet connection detected</string>
+    <string name="no_article_found">No article found</string>
 
     <string name="search_field_hint">Search query term</string>
     <string name="search_date_begin">Begin Date</string>
@@ -24,6 +25,9 @@
     <string name="search_button">SEARCH</string>
 
     <string name="notifications_switch">Enable notifications (once per day)</string>
+
+    <string name="verification_search_field">You must enter a term to search for</string>
+    <string name="verification_checkbox">You must select at least  one category</string>
 
     <string name="new_york_times_dns">https://www.nytimes.com/</string>
 </resources>

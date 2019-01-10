@@ -38,7 +38,7 @@ public class MainFragment extends Fragment {
 
     @BindView(R.id.fragment_main_recycler_view) RecyclerView mRecyclerView;
     @BindView(R.id.fragment_main_progressBar) ProgressBar mProgressBar;
-    @BindView(R.id.fragment_main_connection) TextView mTextViewConnection;
+    @BindView(R.id.fragment_main_text_info) TextView mTextViewInfo;
 
     // Key for the Bundle
     private static final String KEY_POSITION = "position";
@@ -46,7 +46,6 @@ public class MainFragment extends Fragment {
     private Disposable mDisposable;
     private List<Article> mArticles;
     private ArticleAdapter mAdapter;
-
 
     public MainFragment() { }
 
@@ -70,7 +69,8 @@ public class MainFragment extends Fragment {
         // Checks the internet connection
         if(!isConnectedToInternet()){
             // No internet
-            mTextViewConnection.setVisibility(View.VISIBLE);
+            mTextViewInfo.setVisibility(View.VISIBLE);
+            mTextViewInfo.setText(getResources().getString(R.string.no_internet));
             mProgressBar.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.GONE);
         }else{

@@ -12,10 +12,9 @@
         android:layout_centerInParent="true"/>
 
     <TextView
-        android:id="@+id/fragment_main_connection"
+        android:id="@+id/fragment_main_text_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/no_internet"
         android:layout_centerInParent="true"
         android:visibility="gone"/>
 
