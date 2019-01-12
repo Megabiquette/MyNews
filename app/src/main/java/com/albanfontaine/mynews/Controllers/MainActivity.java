@@ -165,7 +165,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this.startActivity(notificationsIntent);
                 return true;
             case R.id.toolbar_help:
-                // TODO
+                Intent helpIntent = new Intent(MainActivity.this, HelpActivity.class);
+                this.startActivity(helpIntent);
                 return true;
             case R.id.toolbar_about:
                 this.showAboutDialog();
