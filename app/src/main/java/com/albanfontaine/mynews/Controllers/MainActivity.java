@@ -1,7 +1,10 @@
 package com.albanfontaine.mynews.Controllers;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -19,6 +22,8 @@ import android.view.MenuItem;
 import com.albanfontaine.mynews.R;
 import com.albanfontaine.mynews.Views.PageAdapter;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -31,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private final int TAB_BUSINESS = 3;
     private final int TAB_POLITICS = 4;
     private final int TAB_TRAVEL = 5;
+
+    // Channel ID for notifications
+    public final static String CHANNEL_ID = "News notifications";
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.activity_main_drawer_layout) DrawerLayout mDrawerLayout;
@@ -47,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.configureDrawerLayout();
         this.configureNavigationView();
         this.configureViewPager();
+
+        this.createNotificationChannel();
     }
 
     @Override
@@ -162,6 +172,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
             default:
                 return true;
+        }
+    }
+
+    private void createNotificationChannel() {
+        // Create the Notification Channel for API 26+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "News notifications";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription("Sends notifications once a day if new articles are posted on a specific subject");
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
         }
     }
 
