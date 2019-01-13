@@ -91,9 +91,7 @@ public class SearchResultActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-                        Log.e("TAG", e.getMessage());
-                    }
+                    public void onError(Throwable e) { Log.e("TAG", e.getMessage()); }
 
                     @Override
                     public void onComplete() {

@@ -37,7 +37,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         String date = format.format(calendar.getTime());
-        Log.e("onReceive", date);
 
         this.mDisposable = NYTimesStreams.streamFetchSearchArticles(query, category, date, date)
                 .subscribeWith(new DisposableObserver<ApiResponseSearch>(){
@@ -57,8 +56,6 @@ public class AlarmReceiver extends BroadcastReceiver {
                         if(numberArticles != 0) {
                             sendNotification(context, numberArticles);
                         }
-                        Log.e("A", "OnComplete");
-                        Log.e("nb articles", String.valueOf(numberArticles));
                     }
                 });
     }
