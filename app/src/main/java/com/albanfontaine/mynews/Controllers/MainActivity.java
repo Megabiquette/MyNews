@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Builds an AlertDialog then shows it
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("About");
-        alert.setMessage("This app was made by\nAlban Fontaine");
+        alert.setMessage(getResources().getString(R.string.about));
         alert.setPositiveButton("OK", null);
         alert.show();
     }

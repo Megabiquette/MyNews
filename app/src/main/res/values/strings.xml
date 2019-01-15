@@ -31,7 +31,7 @@
 
     <string name="new_york_times_dns">https://www.nytimes.com/</string>
 
-    <string name="help_intro_title">My News</string>
+    <string name="help_intro_title">MyNews</string>
     <string name="help_intro_text">This app gets you news articles from the New York Times using the website\'s API. There are 6 categories of articles to choose from, you can search for specific topics using the search functionality and get notified once a day if articles talking about a specific topic gets published on the website.\nPlease note that your device must be connected to the internet for the app to work.</string>
     <string name="help_main_title">Main page</string>
     <string name="help_main_text">The articles are divided into 6 categories: Top Stories, Most Popular, Arts, Business, Politics and Travel. You can switch categories by swiping right/left, clicking the corresponding tab or using the drawer menu. Just click an article on the list to read it.</string>
@@ -40,4 +40,5 @@
     <string name="help_notifications_title">Notifications Page</string>
     <string name="help_notifications_text">You can choose to receive notifications once a day about a specific topic. Like the search functionality, you must enter a term to look for and at least one category. If you decide to change the term or a category while the notifications are on, the notifications will be disabled, so make sure to turn them back on by clicking the switch.</string>
 
+    <string name="about">MyNews\n\nThis app was made by Alban Fontaine</string>
 </resources>

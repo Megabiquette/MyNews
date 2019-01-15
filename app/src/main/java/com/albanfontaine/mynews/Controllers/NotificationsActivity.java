@@ -60,6 +60,7 @@ public class NotificationsActivity extends AppCompatActivity implements Compound
         this.configureToolbar();
         this.restoreCriteria();
 
+        // Set listeners
         mSwitch.setOnCheckedChangeListener(this);
         mCheckBoxArts.setOnCheckedChangeListener(this);
         mCheckBoxBusiness.setOnCheckedChangeListener(this);
@@ -113,7 +114,7 @@ public class NotificationsActivity extends AppCompatActivity implements Compound
             category += "\"Travel\"";
         category += ")";
 
-        // Set an alarm at 11PM
+        // Sets an alarm at 11PM
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 23);
         // Puts parameters in intent
@@ -122,7 +123,7 @@ public class NotificationsActivity extends AppCompatActivity implements Compound
         intent.putExtra(CATEGORY, category);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
     private void disableAlarm(){
@@ -136,14 +137,17 @@ public class NotificationsActivity extends AppCompatActivity implements Compound
     @Override
     protected void onStop() {
         // Save the notification criteria
+        saveCriteria();
+        super.onStop();
+    }
+
+    private void saveCriteria(){
         mSharedPreferences.edit().putString(SEARCH_FIELD, mSearchField.getText().toString()).apply();
         mSharedPreferences.edit().putBoolean(CHECKBOX_ARTS, mCheckBoxArts.isChecked()).apply();
         mSharedPreferences.edit().putBoolean(CHECKBOX_BUSINESS, mCheckBoxBusiness.isChecked()).apply();
         mSharedPreferences.edit().putBoolean(CHECKBOX_POLITICS, mCheckBoxPolitics.isChecked()).apply();
         mSharedPreferences.edit().putBoolean(CHECKBOX_TRAVEL, mCheckBoxTravel.isChecked()).apply();
         mSharedPreferences.edit().putBoolean(SWITCH, mSwitch.isChecked()).apply();
-
-        super.onStop();
     }
 
     private void restoreCriteria(){
