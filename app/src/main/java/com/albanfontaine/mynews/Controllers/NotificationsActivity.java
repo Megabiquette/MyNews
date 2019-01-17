@@ -88,6 +88,7 @@ public class NotificationsActivity extends AppCompatActivity implements Compound
                 if(parametersAreValid()){
                     setAlarm();
                 }else{
+                    // Some parameters are missing, disable switch
                     mSwitch.setChecked(false);
                 }
             }else{
@@ -121,14 +122,14 @@ public class NotificationsActivity extends AppCompatActivity implements Compound
         Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
         intent.putExtra(QUERY, query);
         intent.putExtra(CATEGORY, category);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
     private void disableAlarm(){
         Intent intent = new Intent(getApplicationContext()  , AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(),0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(),0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
         mSwitch.setChecked(false);

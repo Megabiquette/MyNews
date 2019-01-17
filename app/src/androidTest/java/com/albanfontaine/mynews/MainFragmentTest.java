@@ -13,7 +13,6 @@ import io.reactivex.Observable;
 import io.reactivex.observers.TestObserver;
 
 
-@RunWith(AndroidJUnit4.class)
 public class MainFragmentTest {
 
     @Test

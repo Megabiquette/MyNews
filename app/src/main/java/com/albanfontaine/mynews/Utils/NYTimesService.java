@@ -13,14 +13,14 @@ import retrofit2.http.Query;
 
 public interface NYTimesService {
 
-    String API_KEY = "190abb26a35547f29b03a63c6c5bf084";
+    String API_KEY = "1ORkHAOg8WRtd5ydyEqaAIkidNzKg4qm";
 
     // Top Stories
     @GET("topstories/v2/home.json?api-key="+API_KEY)
     Observable<ApiResponseTopStories> fetchTopStoriesArticles();
 
     // Most Popular
-    @GET("mostpopular/v2/mostviewed/all-sections/7.json?api-key="+API_KEY)
+    @GET("mostpopular/v2/viewed/7.json?api-key="+API_KEY)
     Observable<ApiResponseMostPopuplar> fetchMostPopularArticles();
 
     // Categories
