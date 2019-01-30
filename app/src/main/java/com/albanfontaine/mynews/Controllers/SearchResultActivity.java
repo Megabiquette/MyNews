@@ -89,7 +89,6 @@ public class SearchResultActivity extends AppCompatActivity {
                     public void onNext(ApiResponseSearch apiResponseSearch) {
                         updateUIForSearchArticles(apiResponseSearch);
                     }
-
                     @Override
                     public void onError(Throwable e) { Log.e("TAG", e.getMessage()); }
 
