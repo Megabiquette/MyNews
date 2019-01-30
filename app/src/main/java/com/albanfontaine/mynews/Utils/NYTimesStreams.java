@@ -14,6 +14,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class NYTimesStreams {
 
+    // Top Stories API
     public static Observable<ApiResponseTopStories> streamFetchTopStoriesArticles(){
         NYTimesService nytService = NYTimesService.retrofit.create(NYTimesService.class);
         return nytService.fetchTopStoriesArticles()
@@ -22,6 +23,7 @@ public class NYTimesStreams {
                 .timeout(10, TimeUnit.SECONDS);
     }
 
+    // Most Popular API
     public static Observable<ApiResponseMostPopuplar> streamFetchMostPopularArticles(){
         NYTimesService nytService = NYTimesService.retrofit.create(NYTimesService.class);
         return nytService.fetchMostPopularArticles()
@@ -30,6 +32,7 @@ public class NYTimesStreams {
                 .timeout(10, TimeUnit.SECONDS);
     }
 
+    // Search API for categories
     public static Observable<ApiResponseSearch> streamFetchCategoryArticles(String section){
         NYTimesService nytService = NYTimesService.retrofit.create(NYTimesService.class);
         return nytService.fetchCategoryArticles(section)
@@ -38,6 +41,7 @@ public class NYTimesStreams {
                 .timeout(10, TimeUnit.SECONDS);
     }
 
+    // Search API for searches and notifications
     public static Observable<ApiResponseSearch> streamFetchSearchArticles(String query, String category, String beginDate, String endDate){
         NYTimesService nytService = NYTimesService.retrofit.create(NYTimesService.class);
         return nytService.fetchSearchArticles(query, category, beginDate, endDate)

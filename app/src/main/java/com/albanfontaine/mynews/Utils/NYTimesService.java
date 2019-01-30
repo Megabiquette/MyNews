@@ -27,7 +27,7 @@ public interface NYTimesService {
     @GET("search/v2/articlesearch.json?sort=newest&fl=web_url,headline,multimedia,news_desk,pub_date&api-key="+API_KEY)
     Observable<ApiResponseSearch> fetchCategoryArticles(@Query("fq") String section);
 
-    // Search activity
+    // Search and Notifications activity
     @GET("search/v2/articlesearch.json?sort=newest&fl=web_url,headline,multimedia,news_desk,pub_date&api-key="+API_KEY)
     Observable<ApiResponseSearch> fetchSearchArticles(@Query("q") String query,
                                                       @Query("fq") String section,
