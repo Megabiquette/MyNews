@@ -17,9 +17,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
-        debug{
-            testCoverageEnabled true
-        }
     }
     compileOptions {
         sourceCompatibility 1.8
