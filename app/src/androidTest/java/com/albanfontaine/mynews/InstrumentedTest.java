@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import io.reactivex.Observable;
 import io.reactivex.observers.TestObserver;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
@@ -113,6 +114,34 @@ public class InstrumentedTest {
         assertNotNull ("Article has URL", article.getWebUrl());
     }
 
+    @Test
+    public void fetchSearchArticlesTest() throws Exception{
+        Observable<ApiResponseSearch> observableArticles =
+                NYTimesStreams.streamFetchSearchArticles("trump","news_desk:(\"Politics\")", "", "");
+
+        TestObserver<ApiResponseSearch> testObserver = new TestObserver<>();
+
+        observableArticles.subscribeWith(testObserver)
+                .assertNoErrors()
+                .assertNoTimeout()
+                .awaitTerminalEvent();
+
+        ApiResponseSearch articlesFetched = testObserver.values().get(0);
+
+        // Checks that the responses gets at least 1 article
+        assertNotEquals(articlesFetched.getResponse().getDocs().size(),0);
+
+        ApiResponseSearch.Doc article = articlesFetched.getResponse().getDocs().get(0);
+        // Checks that the article has a title
+        assertNotNull ("Article has title", article.getHeadline().getMain());
+        // Checks that the article has a date
+        assertNotNull ("Article has date", article.getPubDate());
+        // Checks that the article is in the "Politics" section
+        assertEquals("Politics", article.getNewsDesk());
+        // Checks that the article has a url
+        assertNotNull ("Article has URL", article.getWebUrl());
+    }
+
     // Put a date in the spinner in DD/MM/YYYY format and in a variable in YYYYMMDD format for the API calls
     @Test
     public void dateProcessingTest(){
@@ -129,27 +158,57 @@ public class InstrumentedTest {
         assertEquals("20190101", date);
     }
 
+    // Test if the begin date is anterior to the end date when using the Search page
     @Test
     public void dateValidationTest(){
-        String beginDate = "20190211";
-        String endDate = "20190302";
+        // Needed for the Toast
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                String beginDate = "20190211";
+                String endDate = "20190302";
 
-        assertTrue(Helper.datesAreValid(context, beginDate, endDate));
+                assertTrue(Helper.datesAreValid(context, beginDate, endDate));
 
-        beginDate = "20190211";
-        endDate = "20190102";
+                beginDate = "20190211";
+                endDate = "20190102";
 
-        assertFalse(Helper.datesAreValid(context, beginDate, endDate));
+                assertFalse(Helper.datesAreValid(context, beginDate, endDate));
+            }
+        });
     }
-/*
+
+
     @Test
     public void parametersValidationTest(){
-        EditText searchField = new EditText(context);
-        CheckBox cbArts = new CheckBox(context);
-        CheckBox cbBusiness = new CheckBox(context);
-        CheckBox cbPolitics = new CheckBox(context);
-        CheckBox cbTravel = new CheckBox(context);
+            // Needed for the Toast
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                EditText searchField = new EditText(context);
+                CheckBox cbArts = new CheckBox(context);
+                CheckBox cbBusiness = new CheckBox(context);
+                CheckBox cbPolitics = new CheckBox(context);
+                CheckBox cbTravel = new CheckBox(context);
+
+                // No text and no checkbox
+                assertFalse(Helper.parametersAreValid(context, searchField, cbArts, cbBusiness, cbPolitics, cbTravel));
+
+                // Text but no checkbox
+                searchField.setText("Trump");
+                assertFalse(Helper.parametersAreValid(context, searchField, cbArts, cbBusiness, cbPolitics, cbTravel));
+
+                // Text and checkbox
+                cbArts.setChecked(true);
+                assertTrue(Helper.parametersAreValid(context, searchField, cbArts, cbBusiness, cbPolitics, cbTravel));
+
+                // Checkbox but no text
+                searchField.setText("");
+                assertFalse(Helper.parametersAreValid(context, searchField, cbArts, cbBusiness, cbPolitics, cbTravel));
+            }
+        });
 
 
-    }*/
+
+    }
 }
