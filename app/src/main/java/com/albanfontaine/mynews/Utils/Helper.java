@@ -3,7 +3,12 @@ package com.albanfontaine.mynews.Utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.albanfontaine.mynews.R;
 
 //Utility class
 public class Helper {
@@ -28,5 +33,20 @@ public class Helper {
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo network = cm.getActiveNetworkInfo();
         return network != null && network.isConnectedOrConnecting();
+    }
+
+    // Checks the validity of the form
+    public static boolean parametersAreValid(Context context, EditText searchField, CheckBox cbArts, CheckBox cbBusiness, CheckBox cbPolitics, CheckBox cbTravel){
+        if(searchField.getText().toString().trim().isEmpty()){
+            Toast.makeText(context, context.getResources().getString(R.string.verification_search_field), Toast.LENGTH_LONG).show();
+            searchField.requestFocus();
+            return false;
+        }
+        if(!cbArts.isChecked() && !cbBusiness.isChecked() &&
+                !cbPolitics.isChecked() && !cbTravel.isChecked()){
+            Toast.makeText(context, context.getResources().getString(R.string.verification_checkbox), Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 }

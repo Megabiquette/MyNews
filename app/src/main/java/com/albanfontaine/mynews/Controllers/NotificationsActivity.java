@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.albanfontaine.mynews.R;
 import com.albanfontaine.mynews.Utils.AlarmReceiver;
+import com.albanfontaine.mynews.Utils.Helper;
 
 import java.util.Calendar;
 
@@ -67,7 +68,7 @@ public class NotificationsActivity extends AppCompatActivity implements Compound
         mCheckBoxPolitics.setOnCheckedChangeListener(this);
         mCheckBoxTravel.setOnCheckedChangeListener(this);
         mSearchField.addTextChangedListener(new TextWatcher() {
-            // Click on the search field: the user changes the criteria, disable the alarm
+            // Change in the search field: the user changes the criteria, disable the alarm
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
@@ -85,7 +86,7 @@ public class NotificationsActivity extends AppCompatActivity implements Compound
             // Click on the switch
             if(isChecked){
                 // User has enabled notifications
-                if(parametersAreValid()){
+                if(Helper.parametersAreValid(this, mSearchField, mCheckBoxArts, mCheckBoxBusiness, mCheckBoxPolitics, mCheckBoxTravel)){
                     setAlarm();
                 }else{
                     // Some parameters are missing, disable switch
@@ -169,19 +170,5 @@ public class NotificationsActivity extends AppCompatActivity implements Compound
         setSupportActionBar(mToolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-    }
-
-    private boolean parametersAreValid(){
-        if(mSearchField.getText().toString().trim().isEmpty()){
-            Toast.makeText(this, getResources().getString(R.string.verification_search_field), Toast.LENGTH_LONG).show();
-            mSearchField.requestFocus();
-            return false;
-        }
-        if(!mCheckBoxArts.isChecked() && !mCheckBoxBusiness.isChecked() &&
-                !mCheckBoxPolitics.isChecked() && !mCheckBoxTravel.isChecked()){
-            Toast.makeText(this, getResources().getString(R.string.verification_checkbox), Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
     }
 }

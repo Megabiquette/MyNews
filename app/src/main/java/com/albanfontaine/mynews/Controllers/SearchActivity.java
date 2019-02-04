@@ -81,7 +81,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 datePicker.show();
                 break;
             case R.id.activity_search_button_search:
-                if(parametersAreValid()) {
+                if(Helper.parametersAreValid(this, mSearchField, mCheckBoxArts, mCheckBoxBusiness, mCheckBoxPolitics, mCheckBoxTravel)) {
                     this.gatherParametersAndLaunchResultActivity();
                 }
                 break;
@@ -110,21 +110,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         intent.putExtra(END_DATE, mEndDate);
         startActivity(intent);
     }
-
-    private boolean parametersAreValid(){
-        if(mSearchField.getText().toString().trim().isEmpty()){
-            Toast.makeText(this, getResources().getString(R.string.verification_search_field), Toast.LENGTH_LONG).show();
-            mSearchField.requestFocus();
-            return false;
-        }
-        if(!mCheckBoxArts.isChecked() && !mCheckBoxBusiness.isChecked() &&
-                !mCheckBoxPolitics.isChecked() && !mCheckBoxTravel.isChecked()){
-            Toast.makeText(this, getResources().getString(R.string.verification_checkbox), Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
-    }
-
 
     ////////////////////////////////////
     // Listeners for the date pickers //
