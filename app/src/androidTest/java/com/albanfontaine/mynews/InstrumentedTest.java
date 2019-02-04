@@ -1,10 +1,14 @@
 package com.albanfontaine.mynews;
 
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.widget.TextView;
 
 import com.albanfontaine.mynews.Models.ApiResponseMostPopuplar;
 import com.albanfontaine.mynews.Models.ApiResponseSearch;
 import com.albanfontaine.mynews.Models.ApiResponseTopStories;
+import com.albanfontaine.mynews.Utils.Helper;
 import com.albanfontaine.mynews.Utils.NYTimesStreams;
 
 import org.junit.Test;
@@ -103,5 +107,20 @@ public class InstrumentedTest {
         assertEquals("Arts", article.getNewsDesk());
         // Checks that the article has a url
         assertNotNull ("Article has URL", article.getWebUrl());
+    }
+
+    @Test
+    public void dateProcessingTest(){
+        Context context = InstrumentationRegistry.getContext();
+        TextView spinner = new TextView(context);
+        int year = 2019;
+        int month = 0;
+        int day = 1;
+        String date;
+
+        date = Helper.processDate(year, month, day, spinner);
+
+        assertEquals("01/01/2019", spinner.getText());
+        assertEquals("20190101", date);
     }
 }

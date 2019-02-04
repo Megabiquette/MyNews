@@ -12,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.albanfontaine.mynews.R;
 import com.albanfontaine.mynews.Utils.Helper;
