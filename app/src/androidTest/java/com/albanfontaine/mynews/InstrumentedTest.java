@@ -117,7 +117,7 @@ public class InstrumentedTest {
     @Test
     public void fetchSearchArticlesTest() throws Exception{
         Observable<ApiResponseSearch> observableArticles =
-                NYTimesStreams.streamFetchSearchArticles("trump","news_desk:(\"Politics\")", "", "");
+                NYTimesStreams.streamFetchSearchArticles("trump","news_desk:(\"Politics\")", null, null);
 
         TestObserver<ApiResponseSearch> testObserver = new TestObserver<>();
 
@@ -178,7 +178,7 @@ public class InstrumentedTest {
         });
     }
 
-
+    // Test for the form validation
     @Test
     public void parametersValidationTest(){
             // Needed for the Toast
@@ -207,8 +207,5 @@ public class InstrumentedTest {
                 assertFalse(Helper.parametersAreValid(context, searchField, cbArts, cbBusiness, cbPolitics, cbTravel));
             }
         });
-
-
-
     }
 }
