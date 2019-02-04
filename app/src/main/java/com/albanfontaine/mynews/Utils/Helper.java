@@ -22,7 +22,7 @@ public class Helper {
         return year+month+day;
     }
 
-    // Puts the date from YYYYMMDD to DD/MM/YY format
+    // Puts the date from YYYY-MM-DD to DD/MM/YY format
     public static String formatDate(String date){
         return date.substring(8, 10)+"/"+date.substring(5, 7)+"/"+date.substring(2,4);
     }
@@ -45,6 +45,15 @@ public class Helper {
         if(!cbArts.isChecked() && !cbBusiness.isChecked() &&
                 !cbPolitics.isChecked() && !cbTravel.isChecked()){
             Toast.makeText(context, context.getResources().getString(R.string.verification_checkbox), Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    // Checks if the begin date < the end date in the Search form
+    public static boolean datesAreValid(Context context, String beginDate, String endDate){
+        if(!beginDate.isEmpty() && !endDate.isEmpty() && Integer.parseInt(beginDate) > Integer.parseInt(endDate)){
+            Toast.makeText(context, context.getResources().getString(R.string.verification_dates), Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

@@ -28,6 +28,7 @@
 
     <string name="verification_search_field">You must enter a term to search for</string>
     <string name="verification_checkbox">You must select at least  one category</string>
+    <string name="verification_dates">"Begin Date" must be before "End Date"</string>
 
     <string name="new_york_times_dns">https://www.nytimes.com/</string>
 

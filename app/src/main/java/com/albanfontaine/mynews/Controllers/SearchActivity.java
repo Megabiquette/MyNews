@@ -81,7 +81,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 datePicker.show();
                 break;
             case R.id.activity_search_button_search:
-                if(Helper.parametersAreValid(this, mSearchField, mCheckBoxArts, mCheckBoxBusiness, mCheckBoxPolitics, mCheckBoxTravel)) {
+                if(Helper.parametersAreValid(this, mSearchField, mCheckBoxArts, mCheckBoxBusiness, mCheckBoxPolitics, mCheckBoxTravel) && Helper.datesAreValid(this, mBeginDate, mEndDate)) {
                     this.gatherParametersAndLaunchResultActivity();
                 }
                 break;
