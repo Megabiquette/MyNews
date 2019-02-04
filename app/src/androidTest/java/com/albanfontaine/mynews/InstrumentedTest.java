@@ -3,6 +3,8 @@ package com.albanfontaine.mynews;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.albanfontaine.mynews.Models.ApiResponseMostPopuplar;
@@ -21,6 +23,8 @@ import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class InstrumentedTest {
+
+    Context context = InstrumentationRegistry.getTargetContext();
 
     // Top Stories API
     @Test
@@ -109,9 +113,10 @@ public class InstrumentedTest {
         assertNotNull ("Article has URL", article.getWebUrl());
     }
 
+    // Put a date in the spinner in DD/MM/YYYY format and in a variable in YYYYMMDD format for the API calls
     @Test
     public void dateProcessingTest(){
-        Context context = InstrumentationRegistry.getContext();
+
         TextView spinner = new TextView(context);
         int year = 2019;
         int month = 0;
@@ -123,4 +128,28 @@ public class InstrumentedTest {
         assertEquals("01/01/2019", spinner.getText());
         assertEquals("20190101", date);
     }
+
+    @Test
+    public void dateValidationTest(){
+        String beginDate = "20190211";
+        String endDate = "20190302";
+
+        assertTrue(Helper.datesAreValid(context, beginDate, endDate));
+
+        beginDate = "20190211";
+        endDate = "20190102";
+
+        assertFalse(Helper.datesAreValid(context, beginDate, endDate));
+    }
+/*
+    @Test
+    public void parametersValidationTest(){
+        EditText searchField = new EditText(context);
+        CheckBox cbArts = new CheckBox(context);
+        CheckBox cbBusiness = new CheckBox(context);
+        CheckBox cbPolitics = new CheckBox(context);
+        CheckBox cbTravel = new CheckBox(context);
+
+
+    }*/
 }
