@@ -1,7 +1,5 @@
 package com.albanfontaine.mynews.Utils;
 
-import android.util.Log;
-
 import com.albanfontaine.mynews.Models.ApiResponseMostPopuplar;
 import com.albanfontaine.mynews.Models.ApiResponseSearch;
 import com.albanfontaine.mynews.Models.ApiResponseTopStories;

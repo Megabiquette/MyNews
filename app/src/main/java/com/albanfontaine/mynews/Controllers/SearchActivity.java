@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.albanfontaine.mynews.R;
+import com.albanfontaine.mynews.Utils.Helper;
 
 import java.util.Calendar;
 
@@ -134,7 +135,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         public void onDateSet(DatePicker view, int year,
                               int month, int day) {
-            mBeginDate = processDate(year, month, day, mSpinnerBegin);
+            mBeginDate = Helper.processDate(year, month, day, mSpinnerBegin);
         }
     };
 
@@ -143,16 +144,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         public void onDateSet(DatePicker view, int year,
                               int month, int day) {
-            mEndDate = processDate(year, month, day, mSpinnerEnd);
+            mEndDate = Helper.processDate(year, month, day, mSpinnerEnd);
         }
     };
-
-    private String processDate(int yearInt, int monthInt, int dayInt, TextView spinner){
-        String year = Integer.toString(yearInt);
-        String month = (monthInt+1 < 10) ? "0" + Integer.toString(monthInt+1) : Integer.toString(monthInt+1);
-        String day = (dayInt < 10) ? "0" + Integer.toString(dayInt) : Integer.toString(dayInt);
-        spinner.setText(day+"/"+month+"/"+year);
-        return year+month+day;
-    }
-
 }

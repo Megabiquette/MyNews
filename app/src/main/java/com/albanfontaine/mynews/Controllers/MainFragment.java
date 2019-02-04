@@ -25,6 +25,7 @@ import com.albanfontaine.mynews.R;
 import com.albanfontaine.mynews.Utils.ItemClickSupport;
 import com.albanfontaine.mynews.Utils.NYTimesStreams;
 import com.albanfontaine.mynews.Views.ArticleAdapter;
+import com.albanfontaine.mynews.Utils.Helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,7 @@ public class MainFragment extends Fragment {
         this.configureOnClickRecyclerView();
 
         // Checks the internet connection
-        if(!isConnectedToInternet()){
+        if(!Helper.isConnectedToInternet(getContext())){
             // No internet
             mTextViewInfo.setVisibility(View.VISIBLE);
             mTextViewInfo.setText(getResources().getString(R.string.no_internet));
@@ -131,7 +132,7 @@ public class MainFragment extends Fragment {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         // Checks internet connection
-                        if(!isConnectedToInternet()){
+                        if(!Helper.isConnectedToInternet(getContext())){
                             // No internet
                             Toast.makeText(getContext(), getResources().getString(R.string.no_internet),
                                     Toast.LENGTH_LONG).show();
@@ -218,7 +219,7 @@ public class MainFragment extends Fragment {
             if(!result.getSubsection().isEmpty()){
                 section += " > " + result.getSubsection();
             }
-            String date = formatDate(result.getPublishedDate());
+            String date = Helper.formatDate(result.getPublishedDate());
             String title = result.getTitle();
             String url = result.getUrl();
             String thumbnail = "";
@@ -233,7 +234,7 @@ public class MainFragment extends Fragment {
     private void updateUIForMostPopularArticles(ApiResponseMostPopuplar response){
         for (ApiResponseMostPopuplar.Result result : response.getResults()){
             String section = result.getSection();
-            String date = formatDate(result.getPublishedDate());
+            String date = Helper.formatDate(result.getPublishedDate());
             String title = result.getTitle();
             String url = result.getUrl();
             String thumbnail = "";
@@ -248,7 +249,7 @@ public class MainFragment extends Fragment {
     private void updateUIForCategoryArticles(ApiResponseSearch response){
         for (ApiResponseSearch.Doc result : response.getResponse().getDocs()){
             String section = result.getNewsDesk();
-            String date = formatDate(result.getPubDate());
+            String date = Helper.formatDate(result.getPubDate());
             String title = result.getHeadline().getMain();
             String url = result.getWebUrl();
             String thumbnail = "";
@@ -259,22 +260,4 @@ public class MainFragment extends Fragment {
         }
         mAdapter.notifyDataSetChanged();
     }
-
-    ///////////
-    // UTILS //
-    ///////////
-
-    // Puts the date in DD/MM/YY format
-    private String formatDate(String date){
-        return date.substring(8, 10)+"/"+date.substring(5, 7)+"/"+date.substring(2,4);
-    }
-
-    // Checks the internet connection
-    private boolean isConnectedToInternet(){
-        ConnectivityManager cm =
-                (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo network = cm.getActiveNetworkInfo();
-        return network != null && network.isConnectedOrConnecting();
-    }
-
 }
