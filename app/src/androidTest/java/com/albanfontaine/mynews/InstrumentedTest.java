@@ -114,6 +114,7 @@ public class InstrumentedTest {
         assertNotNull ("Article has URL", article.getWebUrl());
     }
 
+    // Search API for searches and notifications
     @Test
     public void fetchSearchArticlesTest() throws Exception{
         Observable<ApiResponseSearch> observableArticles =
