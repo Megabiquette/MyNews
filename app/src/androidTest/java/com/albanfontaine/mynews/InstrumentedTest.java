@@ -118,7 +118,7 @@ public class InstrumentedTest {
     @Test
     public void fetchSearchArticlesTest() throws Exception{
         Observable<ApiResponseSearch> observableArticles =
-                NYTimesStreams.streamFetchSearchArticles("trump","news_desk:(\"Politics\")", null, null);
+                NYTimesStreams.streamFetchSearchArticles("trump","news_desk:(\"Politics\")", "20180211", "20180523");
 
         TestObserver<ApiResponseSearch> testObserver = new TestObserver<>();
 
