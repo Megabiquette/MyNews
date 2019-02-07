@@ -93,6 +93,7 @@ public class SearchResultActivity extends AppCompatActivity {
                     @Override
                     public void onComplete() {
                         mProgressBar.setVisibility(View.GONE);
+                        mAdapter.notifyDataSetChanged();
                     }
                 });
     }
@@ -109,7 +110,6 @@ public class SearchResultActivity extends AppCompatActivity {
             }
             mArticles.add(new Article(section, date, title, url, thumbnail));
         }
-        mAdapter.notifyDataSetChanged();
 
         // In case no article was found
         if(response.getResponse().getDocs().isEmpty()){

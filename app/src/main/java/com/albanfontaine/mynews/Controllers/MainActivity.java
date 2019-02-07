@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private final int TAB_POLITICS = 4;
     private final int TAB_TRAVEL = 5;
 
+    // Key for sharedPreferences
+    private static final String LAST_TAB = "lastTab";
+
     // Channel ID for notifications
     public final static String CHANNEL_ID = "News notifications";
 
@@ -45,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.activity_main_nav_view) NavigationView mNavigationView;
     @BindView(R.id.activity_main_viewpager) ViewPager mPager;
     @BindView(R.id.activity_main_tabs) TabLayout mTabs;
+
+    SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +61,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.configureDrawerLayout();
         this.configureNavigationView();
         this.configureViewPager();
-
         this.createNotificationChannel();
+
+        mSharedPreferences = getPreferences(MODE_PRIVATE);
     }
 
     @Override
@@ -196,5 +203,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         alert.setMessage(getResources().getString(R.string.about));
         alert.setPositiveButton("OK", null);
         alert.show();
+    }
+
+    @Override
+    protected void onPause() {
+        // Remember the last tab viewed
+        int lastTab = mPager.getCurrentItem();
+        mSharedPreferences.edit().putInt(LAST_TAB, lastTab).apply();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        // Display the last tab viewed
+        int lastTab = mSharedPreferences.getInt(LAST_TAB, 0);
+        this.mPager.setCurrentItem(lastTab);
+        super.onResume();
     }
 }

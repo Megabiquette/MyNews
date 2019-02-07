@@ -1,10 +1,6 @@
 package com.albanfontaine.mynews.Controllers;
 
-
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,6 +40,14 @@ public class MainFragment extends Fragment {
     // Key for the Bundle
     private static final String KEY_POSITION = "position";
 
+    // Tabs as constants
+    private final int TAB_TOP_STORIES = 0;
+    private final int TAB_MOST_POPULAR = 1;
+    private final int TAB_ARTS = 2;
+    private final int TAB_BUSINESS = 3;
+    private final int TAB_POLITICS = 4;
+    private final int TAB_TRAVEL = 5;
+
     private Disposable mDisposable;
     private List<Article> mArticles;
     private ArticleAdapter mAdapter;
@@ -79,22 +83,22 @@ public class MainFragment extends Fragment {
             int position = getArguments().getInt(KEY_POSITION, 0);
             // Execute request according to the tab
             switch (position){
-                case 0:
+                case TAB_TOP_STORIES:
                     this.executeTopStoriesRequest();
                     break;
-                case 1:
+                case TAB_MOST_POPULAR:
                     this.executeMostPopularRequest();
                     break;
-                case 2:
+                case TAB_ARTS:
                     this.executeCategoryRequest("news_desk:(\"Arts\")");
                     break;
-                case 3:
+                case TAB_BUSINESS:
                     this.executeCategoryRequest("news_desk:(\"Business\")");
                     break;
-                case 4:
+                case TAB_POLITICS:
                     this.executeCategoryRequest("news_desk:(\"Politics\")");
                     break;
-                case 5:
+                case TAB_TRAVEL:
                     this.executeCategoryRequest("news_desk:(\"Travel\")");
                     break;
             }
@@ -164,6 +168,7 @@ public class MainFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         mProgressBar.setVisibility(View.GONE);
+                        mAdapter.notifyDataSetChanged();
                     }
                 });
     }
@@ -184,6 +189,8 @@ public class MainFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         mProgressBar.setVisibility(View.GONE);
+                        mAdapter.notifyDataSetChanged();
+
                     }
                 });
     }
@@ -204,6 +211,8 @@ public class MainFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         mProgressBar.setVisibility(View.GONE);
+                        mAdapter.notifyDataSetChanged();
+
                     }
                 });
     }
@@ -228,7 +237,6 @@ public class MainFragment extends Fragment {
             }
             mArticles.add(new Article(section, date, title, url, thumbnail));
         }
-        mAdapter.notifyDataSetChanged();
     }
 
     private void updateUIForMostPopularArticles(ApiResponseMostPopuplar response){
@@ -243,7 +251,6 @@ public class MainFragment extends Fragment {
             }
             mArticles.add(new Article(section, date, title, url, thumbnail));
         }
-        mAdapter.notifyDataSetChanged();
     }
 
     private void updateUIForCategoryArticles(ApiResponseSearch response){
@@ -258,6 +265,5 @@ public class MainFragment extends Fragment {
             }
             mArticles.add(new Article(section, date, title, url, thumbnail));
         }
-        mAdapter.notifyDataSetChanged();
     }
 }
