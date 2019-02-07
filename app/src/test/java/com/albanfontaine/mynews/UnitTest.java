@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class UnitTest {
 
-    // Put the date in MM/DD/YY format for article display
+    // Put the date in DD/MM/YY format for article display
     @Test
     public void dateFormattingTest(){
         String date = "2019-02-04T12:23:13-05:00";
