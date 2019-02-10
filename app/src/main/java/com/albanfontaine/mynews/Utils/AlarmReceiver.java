@@ -55,6 +55,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                     public void onComplete() {
                         if(numberArticles != 0) {
                             sendNotification(context, numberArticles);
+                            disposeWhenDestroy();
                         }
                     }
                 });
@@ -72,5 +73,10 @@ public class AlarmReceiver extends BroadcastReceiver {
         manager.notify(0, builder.build());
     }
 
+    private void disposeWhenDestroy(){
+        if(this.mDisposable != null && !this.mDisposable.isDisposed()){
+            this.mDisposable.dispose();
+        }
+    }
 
 }

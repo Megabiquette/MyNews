@@ -130,6 +130,7 @@ public class MainFragment extends Fragment {
         this.mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
+    // Click on an article in the list
     private void configureOnClickRecyclerView(){
         ItemClickSupport.addTo(mRecyclerView, R.layout.fragment_main_item)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
