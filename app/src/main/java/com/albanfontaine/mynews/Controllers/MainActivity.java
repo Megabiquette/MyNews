@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.albanfontaine.mynews.R;
+import com.albanfontaine.mynews.Utils.Constants;
 import com.albanfontaine.mynews.Views.PageAdapter;
 
 import java.util.Objects;
@@ -29,20 +30,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    // Tabs as constants
-    private final int TAB_TOP_STORIES = 0;
-    private final int TAB_MOST_POPULAR = 1;
-    private final int TAB_ARTS = 2;
-    private final int TAB_BUSINESS = 3;
-    private final int TAB_POLITICS = 4;
-    private final int TAB_TRAVEL = 5;
-
-    // Key for sharedPreferences
-    private static final String LAST_TAB = "lastTab";
-
-    // Channel ID for notifications
-    public final static String CHANNEL_ID = "News notifications";
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.activity_main_drawer_layout) DrawerLayout mDrawerLayout;
@@ -134,22 +121,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Changes the ViewPager to the selected tab from the Navigation Drawer
         switch (item.getItemId()){
             case R.id.activity_main_drawer_top_stories:
-                this.mPager.setCurrentItem(TAB_TOP_STORIES);
+                this.mPager.setCurrentItem(Constants.TAB_TOP_STORIES);
                 break;
             case R.id.activity_main_drawer_most_popular:
-                this.mPager.setCurrentItem(TAB_MOST_POPULAR);
+                this.mPager.setCurrentItem(Constants.TAB_MOST_POPULAR);
                 break;
             case R.id.activity_main_drawer_arts:
-                this.mPager.setCurrentItem(TAB_ARTS);
+                this.mPager.setCurrentItem(Constants.TAB_ARTS);
                 break;
             case R.id.activity_main_drawer_business:
-                this.mPager.setCurrentItem(TAB_BUSINESS);
+                this.mPager.setCurrentItem(Constants.TAB_BUSINESS);
                 break;
             case R.id.activity_main_drawer_politics:
-                this.mPager.setCurrentItem(TAB_POLITICS);
+                this.mPager.setCurrentItem(Constants.TAB_POLITICS);
                 break;
             case R.id.activity_main_drawer_travel:
-                this.mPager.setCurrentItem(TAB_TRAVEL);
+                this.mPager.setCurrentItem(Constants.TAB_TRAVEL);
                 break;
             default:
                 break;
@@ -188,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "News notifications";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            NotificationChannel channel = new NotificationChannel(Constants.CHANNEL_ID, name, importance);
             channel.setDescription("Sends notifications once a day if new articles are posted on a specific subject");
 
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
@@ -209,14 +196,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onPause() {
         // Remember the last tab viewed
         int lastTab = mPager.getCurrentItem();
-        mSharedPreferences.edit().putInt(LAST_TAB, lastTab).apply();
+        mSharedPreferences.edit().putInt(Constants.LAST_TAB, lastTab).apply();
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         // Display the last tab viewed
-        int lastTab = mSharedPreferences.getInt(LAST_TAB, 0);
+        int lastTab = mSharedPreferences.getInt(Constants.LAST_TAB, 0);
         this.mPager.setCurrentItem(lastTab);
         super.onResume();
     }

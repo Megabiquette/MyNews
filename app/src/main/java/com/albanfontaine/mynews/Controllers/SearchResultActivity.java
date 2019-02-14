@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.albanfontaine.mynews.Models.ApiResponseSearch;
 import com.albanfontaine.mynews.Models.Article;
 import com.albanfontaine.mynews.R;
+import com.albanfontaine.mynews.Utils.Constants;
 import com.albanfontaine.mynews.Utils.ItemClickSupport;
 import com.albanfontaine.mynews.Utils.NYTimesStreams;
 import com.albanfontaine.mynews.Views.ArticleAdapter;
@@ -32,12 +33,6 @@ public class SearchResultActivity extends AppCompatActivity {
     @BindView(R.id.fragment_main_recycler_view) RecyclerView mRecyclerView;
     @BindView(R.id.fragment_main_progressBar) ProgressBar mProgressBar;
     @BindView(R.id.fragment_main_text_info) TextView mTextViewInfo;
-
-    // Keys for the Bundle
-    private static final String QUERY = "query";
-    private static final String CATEGORY = "category";
-    private static final String BEGIN_DATE = "beginDate";
-    private static final String END_DATE = "endDate";
 
     private Disposable mDisposable;
     private List<Article> mArticles;
@@ -58,10 +53,10 @@ public class SearchResultActivity extends AppCompatActivity {
         this.configureOnClickRecyclerView();
 
         Intent intent = getIntent();
-        mQuery = intent.getStringExtra(QUERY);
-        mCategory = intent.getStringExtra(CATEGORY);
-        mBeginDate = intent.getStringExtra(BEGIN_DATE);
-        mEndDate = intent.getStringExtra(END_DATE);
+        mQuery = intent.getStringExtra(Constants.QUERY);
+        mCategory = intent.getStringExtra(Constants.CATEGORY);
+        mBeginDate = intent.getStringExtra(Constants.BEGIN_DATE);
+        mEndDate = intent.getStringExtra(Constants.END_DATE);
 
         if(!Helper.isConnectedToInternet(getBaseContext())){
             // No internet

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.albanfontaine.mynews.R;
+import com.albanfontaine.mynews.Utils.Constants;
 import com.albanfontaine.mynews.Utils.Helper;
 
 import java.util.Calendar;
@@ -32,12 +33,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     @BindView(R.id.checkbox_business) CheckBox mCheckBoxBusiness;
     @BindView(R.id.checkbox_politics) CheckBox mCheckBoxPolitics;
     @BindView(R.id.checkbox_travel) CheckBox mCheckBoxTravel;
-
-    // Keys for the Bundle
-    private static final String QUERY = "query";
-    private static final String CATEGORY = "category";
-    private static final String BEGIN_DATE = "beginDate";
-    private static final String END_DATE = "endDate";
 
     private String mBeginDate = "";
     private String mEndDate = "";
@@ -103,10 +98,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         // Launch the request in another activity
         Intent intent = new Intent(this, SearchResultActivity.class);
-        intent.putExtra(QUERY, query);
-        intent.putExtra(CATEGORY, category);
-        intent.putExtra(BEGIN_DATE, mBeginDate);
-        intent.putExtra(END_DATE, mEndDate);
+        intent.putExtra(Constants.QUERY, query);
+        intent.putExtra(Constants.CATEGORY, category);
+        intent.putExtra(Constants.BEGIN_DATE, mBeginDate);
+        intent.putExtra(Constants.END_DATE, mEndDate);
         startActivity(intent);
     }
 

@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.webkit.WebView;
 
 import com.albanfontaine.mynews.R;
+import com.albanfontaine.mynews.Utils.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +23,7 @@ public class WebViewActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         this.configureToolbar();
 
-        String url = getIntent().getExtras().getString("ARTICLE_URL");
+        String url = getIntent().getExtras().getString(Constants.ARTICLE_URL);
         mWebView.loadUrl(url);
 
     }

@@ -17,6 +17,7 @@ import android.widget.Switch;
 
 import com.albanfontaine.mynews.R;
 import com.albanfontaine.mynews.Utils.AlarmReceiver;
+import com.albanfontaine.mynews.Utils.Constants;
 import com.albanfontaine.mynews.Utils.Helper;
 
 import java.util.Calendar;
@@ -34,18 +35,7 @@ public class NotificationsActivity extends AppCompatActivity implements Compound
     @BindView(R.id.checkbox_travel) CheckBox mCheckBoxTravel;
     @BindView(R.id.activity_notifications_switch) Switch mSwitch;
 
-    // Keys for the Bundle
-    private static final String QUERY = "query";
-    private static final String CATEGORY = "category";
-
     SharedPreferences mSharedPreferences;
-    // Keys for sharedPreferences
-    private static final String SEARCH_FIELD = "searchField";
-    private static final String CHECKBOX_ARTS = "checkboxArts";
-    public static final String CHECKBOX_BUSINESS = "checkboxBusiness";
-    public static final String  CHECKBOX_POLITICS = "checkboxPolitics";
-    public static final String CHECKBOX_TRAVEL = "checkboxTravel";
-    public static final String SWITCH = "switch";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,8 +108,8 @@ public class NotificationsActivity extends AppCompatActivity implements Compound
         calendar.set(Calendar.HOUR_OF_DAY, 23);
         // Puts parameters in intent
         Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-        intent.putExtra(QUERY, query);
-        intent.putExtra(CATEGORY, category);
+        intent.putExtra(Constants.QUERY, query);
+        intent.putExtra(Constants.CATEGORY, category);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
@@ -141,21 +131,21 @@ public class NotificationsActivity extends AppCompatActivity implements Compound
     }
 
     private void saveCriteria(){
-        mSharedPreferences.edit().putString(SEARCH_FIELD, mSearchField.getText().toString()).apply();
-        mSharedPreferences.edit().putBoolean(CHECKBOX_ARTS, mCheckBoxArts.isChecked()).apply();
-        mSharedPreferences.edit().putBoolean(CHECKBOX_BUSINESS, mCheckBoxBusiness.isChecked()).apply();
-        mSharedPreferences.edit().putBoolean(CHECKBOX_POLITICS, mCheckBoxPolitics.isChecked()).apply();
-        mSharedPreferences.edit().putBoolean(CHECKBOX_TRAVEL, mCheckBoxTravel.isChecked()).apply();
-        mSharedPreferences.edit().putBoolean(SWITCH, mSwitch.isChecked()).apply();
+        mSharedPreferences.edit().putString(Constants.SEARCH_FIELD, mSearchField.getText().toString()).apply();
+        mSharedPreferences.edit().putBoolean(Constants.CHECKBOX_ARTS, mCheckBoxArts.isChecked()).apply();
+        mSharedPreferences.edit().putBoolean(Constants.CHECKBOX_BUSINESS, mCheckBoxBusiness.isChecked()).apply();
+        mSharedPreferences.edit().putBoolean(Constants.CHECKBOX_POLITICS, mCheckBoxPolitics.isChecked()).apply();
+        mSharedPreferences.edit().putBoolean(Constants.CHECKBOX_TRAVEL, mCheckBoxTravel.isChecked()).apply();
+        mSharedPreferences.edit().putBoolean(Constants.SWITCH, mSwitch.isChecked()).apply();
     }
 
     private void restoreCriteria(){
-        mSearchField.setText(mSharedPreferences.getString(SEARCH_FIELD, ""));
-        mCheckBoxArts.setChecked(mSharedPreferences.getBoolean(CHECKBOX_ARTS, false));
-        mCheckBoxBusiness.setChecked(mSharedPreferences.getBoolean(CHECKBOX_BUSINESS, false));
-        mCheckBoxPolitics.setChecked(mSharedPreferences.getBoolean(CHECKBOX_POLITICS, false));
-        mCheckBoxTravel.setChecked(mSharedPreferences.getBoolean(CHECKBOX_TRAVEL, false));
-        mSwitch.setChecked(mSharedPreferences.getBoolean(SWITCH, false));
+        mSearchField.setText(mSharedPreferences.getString(Constants.SEARCH_FIELD, ""));
+        mCheckBoxArts.setChecked(mSharedPreferences.getBoolean(Constants.CHECKBOX_ARTS, false));
+        mCheckBoxBusiness.setChecked(mSharedPreferences.getBoolean(Constants.CHECKBOX_BUSINESS, false));
+        mCheckBoxPolitics.setChecked(mSharedPreferences.getBoolean(Constants.CHECKBOX_POLITICS, false));
+        mCheckBoxTravel.setChecked(mSharedPreferences.getBoolean(Constants.CHECKBOX_TRAVEL, false));
+        mSwitch.setChecked(mSharedPreferences.getBoolean(Constants.SWITCH, false));
     }
 
     ///////////

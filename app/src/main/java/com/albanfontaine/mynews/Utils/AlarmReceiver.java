@@ -62,7 +62,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void sendNotification(Context context, int numberArticles){
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, MainActivity.CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, Constants.CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("New articles!")
                 .setContentText(numberArticles + " new articles corresponding to your criteria published")

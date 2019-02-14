@@ -29,7 +29,7 @@ public class InstrumentedTest {
 
     // Top Stories API
     @Test
-    public void fetchTopStoriesArticlesTest() throws Exception{
+    public void fetchTopStoriesArticlesTest(){
         Observable<ApiResponseTopStories> observableArticles =
                 NYTimesStreams.streamFetchTopStoriesArticles();
 
@@ -58,7 +58,7 @@ public class InstrumentedTest {
 
     // Most Popular API
     @Test
-    public void fetchMostPopularArticlesTest() throws Exception{
+    public void fetchMostPopularArticlesTest(){
         Observable<ApiResponseMostPopuplar> observableArticles =
                 NYTimesStreams.streamFetchMostPopularArticles();
 
@@ -87,7 +87,7 @@ public class InstrumentedTest {
 
     // Search API for categories
     @Test
-    public void fetchCategoryArticlesTest() throws Exception{
+    public void fetchCategoryArticlesTest(){
         Observable<ApiResponseSearch> observableArticles =
                 NYTimesStreams.streamFetchCategoryArticles("news_desk:(\"Arts\")");
 
@@ -116,7 +116,7 @@ public class InstrumentedTest {
 
     // Search API for searches and notifications
     @Test
-    public void fetchSearchArticlesTest() throws Exception{
+    public void fetchSearchArticlesTest(){
         Observable<ApiResponseSearch> observableArticles =
                 NYTimesStreams.streamFetchSearchArticles("trump","news_desk:(\"Politics\")", "20180211", "20180523");
 

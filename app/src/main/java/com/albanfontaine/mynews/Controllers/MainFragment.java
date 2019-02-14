@@ -18,6 +18,7 @@ import com.albanfontaine.mynews.Models.ApiResponseSearch;
 import com.albanfontaine.mynews.Models.ApiResponseTopStories;
 import com.albanfontaine.mynews.Models.Article;
 import com.albanfontaine.mynews.R;
+import com.albanfontaine.mynews.Utils.Constants;
 import com.albanfontaine.mynews.Utils.ItemClickSupport;
 import com.albanfontaine.mynews.Utils.NYTimesStreams;
 import com.albanfontaine.mynews.Views.ArticleAdapter;
@@ -37,17 +38,6 @@ public class MainFragment extends Fragment {
     @BindView(R.id.fragment_main_progressBar) ProgressBar mProgressBar;
     @BindView(R.id.fragment_main_text_info) TextView mTextViewInfo;
 
-    // Key for the Bundle
-    private static final String KEY_POSITION = "position";
-
-    // Tabs as constants
-    private final int TAB_TOP_STORIES = 0;
-    private final int TAB_MOST_POPULAR = 1;
-    private final int TAB_ARTS = 2;
-    private final int TAB_BUSINESS = 3;
-    private final int TAB_POLITICS = 4;
-    private final int TAB_TRAVEL = 5;
-
     private Disposable mDisposable;
     private List<Article> mArticles;
     private ArticleAdapter mAdapter;
@@ -58,7 +48,7 @@ public class MainFragment extends Fragment {
         MainFragment frag = new MainFragment();
 
         Bundle args = new Bundle();
-        args.putInt(KEY_POSITION, position);
+        args.putInt(Constants.KEY_POSITION, position);
         frag.setArguments(args);
         return frag;
     }
@@ -80,25 +70,25 @@ public class MainFragment extends Fragment {
             mRecyclerView.setVisibility(View.GONE);
         }else{
             // Gets which tab is currently viewed
-            int position = getArguments().getInt(KEY_POSITION, 0);
+            int position = getArguments().getInt(Constants.KEY_POSITION, 0);
             // Execute request according to the tab
             switch (position){
-                case TAB_TOP_STORIES:
+                case Constants.TAB_TOP_STORIES:
                     this.executeTopStoriesRequest();
                     break;
-                case TAB_MOST_POPULAR:
+                case Constants.TAB_MOST_POPULAR:
                     this.executeMostPopularRequest();
                     break;
-                case TAB_ARTS:
+                case Constants.TAB_ARTS:
                     this.executeCategoryRequest("news_desk:(\"Arts\")");
                     break;
-                case TAB_BUSINESS:
+                case Constants.TAB_BUSINESS:
                     this.executeCategoryRequest("news_desk:(\"Business\")");
                     break;
-                case TAB_POLITICS:
+                case Constants.TAB_POLITICS:
                     this.executeCategoryRequest("news_desk:(\"Politics\")");
                     break;
-                case TAB_TRAVEL:
+                case Constants.TAB_TRAVEL:
                     this.executeCategoryRequest("news_desk:(\"Travel\")");
                     break;
             }
@@ -144,7 +134,7 @@ public class MainFragment extends Fragment {
                         }else{
                             // Starts new activity to read the article
                             Intent intent = new Intent(getContext(), WebViewActivity.class);
-                            intent.putExtra("ARTICLE_URL", mAdapter.getArticleUrl(position));
+                            intent.putExtra(Constants.ARTICLE_URL, mAdapter.getArticleUrl(position));
                             startActivity(intent);
                         }
                     }
