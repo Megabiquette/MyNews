@@ -54,12 +54,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        return true;
-    }
-
-    @Override
     public void onBackPressed() {
         if(this.mDrawerLayout.isDrawerOpen(GravityCompat.START)){
             this.mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -78,6 +72,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
     }
 
     private void configureDrawerLayout(){
